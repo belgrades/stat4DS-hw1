@@ -1,24 +1,63 @@
 ---
-title: "Untitled"
+title: "HW1"
 author: "Gabriel Nespoli | Fernando Crema | Mauricio Fadel Argerich"
 date: "October 9, 2016"
 output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-Gabriel is adding AGAIN
-
+## Part I: R Syntax & Functions
+### a.
+The command creates a vector with 4 elements that are characters.
 ```{r}
-summary(cars)
+vector1 <- c("5", "12", "7", "32")
+```
+The result of the command will be 7 because it's sorted alphabetically.
+```{r}
+max(vector1)
+```
+The vector is sorted alphabetically (not using the numeric value of each element), so the result is: 12, 32, 5, 7.
+```{r}
+sort(vector1)
+```
+The command produces an error because it's not possible to sum a vector which elements are characters.
+```{r eval=FALSE}
+sum(vector1)
 ```
 
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
+### b.
+The commands don't work. Because the first element of the vector is a character, all the elements in the vector are changed to the most "generic" type of data of its elements which in this case is characters. So when we try to add the second and third element, R tells us it's not possible to add non-numeric arguments, because they're characters.
+```{r eval=FALSE}
+vector2 <- c("5", 7, 12) 
+vector2[2] + vector2[3]
+```
+The commands work and the result is 19 (7+12). A mainframe can contain different kind of data types, so even the first element is a character, the other elements are number and adding the second and third element works fine.
+```{r}
+dataframe3 <- data.frame(z1 = "5", z2 = 7, z3 = 12) 
+dataframe3[1,2] + dataframe3[1,3]
+```
+Each element of a list is a list, when we do list4[2] we get the second element of the list (with its name and value), while doing list4[[2]] returns the value of the element. This is why the second command in the code chunk works while the last one doesn't.
+```{r eval=FALSE}
+list4 <- list(z1 = "6", z2 = 42, z3 = "49", z4 = 126) 
+list4[[2]] + list4[[4]]
+list4[2] + list4[4]
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### c.
+From 1 to 10000 in increments of 372.
+```{r}
+seq(1,10000,372)
+```
+Sequence of 50 numbers from 1 to 10000.
+```{r}
+seq(1,10000,length.out = 50)
+```
+
+### d.
+This command repeats the whole vector 3 times in order.
+```{r}
+rep(1:3, times = 3)
+```
+While this command repeats each element of the vector 3 times (before passing on to the next element).
+```{r}
+rep(1:3, each = 3)
+```

@@ -1,6 +1,6 @@
 ---
 title: "Untitled"
-author: "Gabriel Nespoli | Fernando Crema | Mauricio Fadel"
+author: "Gabriel Nespoli | Fernando Crema | Mauricio Fadel Argerich"
 date: "October 9, 2016"
 output: html_document
 ---

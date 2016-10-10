@@ -61,3 +61,89 @@ While this command repeats each element of the vector 3 times (before passing on
 ```{r}
 rep(1:3, each = 3)
 ```
+
+## Part V: A naïve version of the Naïve Bayes Classifier
+The exercise gives us a table of the historical events of four weather parameters (outlook, temperature, humidity, wind) and, based in these weather conditions, we played tennis or not. Then, knowing the weather condition for today, it asks us if we will play tennis. In other words, based in our past experience with the given condition, i.e. Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong, what is most propable evidence expected?
+
+We start to compute the total "Yes" and "No" probability. In overall table, how many times we played tennis and how many we did not:
+```{r eval=FALSE}
+P(Play = Yes) = 9/14
+P(Play = No) = 5/14
+```
+
+Considering this results, we calculate how many times we played tennis and how many we didn't for each hypothesis. For example, the conditional probability of playing tennis in a sunny day is:
+
+```{r eval=FALSE}
+P(Outlook = Sunny | Play = Yes) = 2/9
+P(Outlook = Sunny | Play = No) = 3/5
+```
+
+For the others hypothesis, we have:
+
+Outlook
+```{r eval=FALSE}
+P(Outlook = Overcast | Play = Yes) = 4/9
+P(Outlook = Overcast | Play = No) = 0/5
+P(Outlook = Rain | Play = Yes) = 3/9
+P(Outlook = Rain | Play = No) = 2/5
+```
+
+Temperature
+```{r eval=FALSE}
+P(Temperature = Hot | Play = Yes) = 2/9
+P(Temperature = Hot | Play = No) = 2/5
+P(Temperature = Mild | Play = Yes) = 4/9
+P(Temperature = Mild | Play = No) = 2/5
+P(Temperature = Cool | Play = Yes) = 3/9
+P(Temperature = Cool | Play = No) = 1/5
+```
+
+Humidity
+```{r eval=FALSE}
+P(Humidity = High | Play = Yes) = 3/9
+P(Humidity = High | Play = No) = 4/5
+P(Humidity = Normal | Play = Yes) = 6/9
+P(Humidity = Normal | Play = No) = 1/5
+```
+
+Wind
+```{r eval=FALSE}
+P(Wind = Strong | Play = Yes) = 3/9
+P(Wind = Strong | Play = No) = 3/5
+P(Wind = Weak | Play = Yes) = 6/9
+P(Wind = Weak | Play = No) = 2/5
+```
+
+Considering these evidences hypothesis, to evaluate the probability of playing tennis or not, we have to calculate the expressions:
+
+```{r eval=FALSE}
+argmax{P(Yes | Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong),
+P(No | Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong)}
+```
+
+Calculating each argument separetely we have:
+```{r eval=FALSE}
+P(Yes | (Sunny, Cool, High , Strong)) = P(Yes)*[P(Sunny|Yes)*P(Cool|Yes)*P(High|Yes)*P(Strong|Yes)]
+```
+And
+```{r eval=FALSE}
+P(No | (Sunny, Cool, High , Strong)) = P(No)*[P(Sunny|No)*P(Cool|No)*P(High|No)*P(Strong|No)]
+```
+
+Which gives us:
+```{r eval=FALSE}
+P(Yes | (Sunny, Cool, High , Strong)) = (9/14)*(2/9 * 3/9 * 3/9 * 3/9)
+P(No | (Sunny, Cool, High , Strong)) = (5/14)*(3/5 * 1/5 * 4/5 * 3/5)
+```
+
+Naming P(Yes | (Sunny, Cool, High , Strong)) P_Yes and P(No | (Sunny, Cool, High , Strong)) P_No and calculating, we have:
+
+```{r}
+P_Yes <- (9/14)*(2/9 * 3/9 * 3/9 * 3/9)
+P_Yes
+
+P_No <- (5/14)*(3/5 * 1/5 * 4/5 * 3/5)
+P_No
+```
+
+As P_No is greater than P_Yes, we will not play tennis tomorrow.

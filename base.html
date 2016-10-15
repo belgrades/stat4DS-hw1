@@ -179,6 +179,73 @@ list4[2] + list4[4]</code></pre>
 <pre><code>## [1] 1 1 1 2 2 2 3 3 3</code></pre>
 </div>
 </div>
+<div id="part-iv-coins-randomness-and-genetics" class="section level2">
+<h2>Part IV: Coins, Randomness and Genetics</h2>
+<div id="summary-of-the-video" class="section level3">
+<h3>Summary of the video:</h3>
+<p>The video starts talking about how many times do we need to shuffle the deck of cards to make it random, which means, the cards before the shuffle are totally different just after. As we know, the smaller the deck, the easier is tho get it shuffled randomly, because if the deck is 4 cards, them the number of possibilities is 4! = 4x3x2 = 24.</p>
+<p>But usually we cannot try out all the possibilities. In a complete deck of 52 cards, it means that we have 52! possibilities of sequences of cards, which results in more than 8×10⁶⁷ possibilities.</p>
+<p>Also, the mentioned that if you give an ordered deck of cards to a friend and tell him to shuffle by the common way of shuffling (without seeing while he does), which divides the deck in two parts of almost the same size, and shuffle them and put them together again, you will still have 2^(number of shuffles) rising “small” sequences in the middle of the deck. If your friend mix 3 times, so there’s 8 rising sequences in the deck. And then you do a magic: remove cards one by one. If a card is not in order with the previous card, you start another pile. If it’s in order, you put in the same pile. In the 9th pile is the card that the person has taken.</p>
+<p>He affirmed again, practically, the deck is never completely mixed, it is not random. He raised a question: how much do we accept it to be shuffled? It will not be random, but how much do we consider it enough?</p>
+<p>When he cites the on-line poker, he compares that to have a deck really shuffled randomly, you would need to have computer with the capacity to process numbers in the order of 6x10^67, which is far from the possibilities of a computer of 32 bits (2^32 = 4,3 billions possibilities).</p>
+<p>Then, a student asked how about to put the cards on the table and mash them with the hands. He explained that this is efficient and is hard to predict the result or the efficiency of this method because it is hard to model this method, but certainly, with 8x10^67 possibilities, there will be still cards in sequence.</p>
+<p>Another student suggested to take off the top ten cards, and shuffle and then shuffle the rest of the deck. The professor explained that there is many machines in Vegas which use this idea: the deck enters in the machine and cards are separated in ten shelves, some on and others under the pile. But again, the problem resides that the decision that the machine does is based in the random number which it generates, again 2^32 or 2^64.</p>
+<p>He explained again that practically nothing is random because we do not try all the possibilities: we do not shuffle the cards enough, we do not toss the coin enough, etc.</p>
+<p>He stated that the problem of lack of randomness in tossing coins is because we use Physics, we can define the position in which the coin will end. If we know the initial condition (head or tail), apply a known force in a known region of the coin, you can know the height that the coin will reach and how many turns it will spin, so you can tell how it will end - tail or head.</p>
+<p>So, he concludes that nothing is completely random.</p>
+</div>
+</div>
+<div id="part-v-a-naive-version-of-the-naive-bayes-classifier" class="section level2">
+<h2>Part V: A naïve version of the Naïve Bayes Classifier</h2>
+<p>The exercise gives us a table of the historical events of four weather parameters (outlook, temperature, humidity, wind) and, based in these weather conditions, we played tennis or not. Then, knowing the weather condition for today, it asks us if we will play tennis. In other words, based in our past experience with the given condition, i.e. Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong, what is most propable evidence expected?</p>
+<p>We start to compute the total “Yes” and “No” probability. In overall table, how many times we played tennis and how many we did not:</p>
+<pre class="r"><code>P(Play = Yes) = 9/14
+P(Play = No) = 5/14</code></pre>
+<p>Considering this results, we calculate how many times we played tennis and how many we didn’t for each hypothesis. For example, the conditional probability of playing tennis in a sunny day is:</p>
+<pre class="r"><code>P(Outlook = Sunny | Play = Yes) = 2/9
+P(Outlook = Sunny | Play = No) = 3/5</code></pre>
+<p>For the others hypothesis, we have:</p>
+<p>Outlook</p>
+<pre class="r"><code>P(Outlook = Overcast | Play = Yes) = 4/9
+P(Outlook = Overcast | Play = No) = 0/5
+P(Outlook = Rain | Play = Yes) = 3/9
+P(Outlook = Rain | Play = No) = 2/5</code></pre>
+<p>Temperature</p>
+<pre class="r"><code>P(Temperature = Hot | Play = Yes) = 2/9
+P(Temperature = Hot | Play = No) = 2/5
+P(Temperature = Mild | Play = Yes) = 4/9
+P(Temperature = Mild | Play = No) = 2/5
+P(Temperature = Cool | Play = Yes) = 3/9
+P(Temperature = Cool | Play = No) = 1/5</code></pre>
+<p>Humidity</p>
+<pre class="r"><code>P(Humidity = High | Play = Yes) = 3/9
+P(Humidity = High | Play = No) = 4/5
+P(Humidity = Normal | Play = Yes) = 6/9
+P(Humidity = Normal | Play = No) = 1/5</code></pre>
+<p>Wind</p>
+<pre class="r"><code>P(Wind = Strong | Play = Yes) = 3/9
+P(Wind = Strong | Play = No) = 3/5
+P(Wind = Weak | Play = Yes) = 6/9
+P(Wind = Weak | Play = No) = 2/5</code></pre>
+<p>Considering these evidences hypothesis, to evaluate the probability of playing tennis or not, we have to calculate the expressions:</p>
+<pre class="r"><code>argmax{P(Yes | Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong),
+P(No | Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong)}</code></pre>
+<p>Calculating each argument separetely we have:</p>
+<pre class="r"><code>P(Yes | (Sunny, Cool, High , Strong)) = P(Yes)*[P(Sunny|Yes)*P(Cool|Yes)*P(High|Yes)*P(Strong|Yes)]</code></pre>
+<p>And</p>
+<pre class="r"><code>P(No | (Sunny, Cool, High , Strong)) = P(No)*[P(Sunny|No)*P(Cool|No)*P(High|No)*P(Strong|No)]</code></pre>
+<p>Which gives us:</p>
+<pre class="r"><code>P(Yes | (Sunny, Cool, High , Strong)) = (9/14)*(2/9 * 3/9 * 3/9 * 3/9)
+P(No | (Sunny, Cool, High , Strong)) = (5/14)*(3/5 * 1/5 * 4/5 * 3/5)</code></pre>
+<p>Naming P(Yes | (Sunny, Cool, High , Strong)) P_Yes and P(No | (Sunny, Cool, High , Strong)) P_No and calculating, we have:</p>
+<pre class="r"><code>P_Yes &lt;- (9/14)*(2/9 * 3/9 * 3/9 * 3/9)
+P_Yes</code></pre>
+<pre><code>## [1] 0.005291005</code></pre>
+<pre class="r"><code>P_No &lt;- (5/14)*(3/5 * 1/5 * 4/5 * 3/5)
+P_No</code></pre>
+<pre><code>## [1] 0.02057143</code></pre>
+<p>As P_No is greater than P_Yes, we will not play tennis tomorrow.</p>
+</div>
 
 
 

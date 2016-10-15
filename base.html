@@ -154,11 +154,15 @@ list4[2] + list4[4]</code></pre>
 <div id="c." class="section level3">
 <h3>c.</h3>
 <p>From 1 to 10000 in increments of 372.</p>
-<pre class="r"><code>seq(1,10000,372)</code></pre>
+<pre class="r"><code>seq(from = 1,
+    to = 10000,
+    by = 372)</code></pre>
 <pre><code>##  [1]    1  373  745 1117 1489 1861 2233 2605 2977 3349 3721 4093 4465 4837
 ## [15] 5209 5581 5953 6325 6697 7069 7441 7813 8185 8557 8929 9301 9673</code></pre>
 <p>Sequence of 50 numbers from 1 to 10000.</p>
-<pre class="r"><code>seq(1,10000,length.out = 50)</code></pre>
+<pre class="r"><code>seq(from = 1,
+    to = 10000,
+    length.out = 50)</code></pre>
 <pre><code>##  [1]     1.0000   205.0612   409.1224   613.1837   817.2449  1021.3061
 ##  [7]  1225.3673  1429.4286  1633.4898  1837.5510  2041.6122  2245.6735
 ## [13]  2449.7347  2653.7959  2857.8571  3061.9184  3265.9796  3470.0408
@@ -172,10 +176,12 @@ list4[2] + list4[4]</code></pre>
 <div id="d." class="section level3">
 <h3>d.</h3>
 <p>This command repeats the whole vector 3 times in order.</p>
-<pre class="r"><code>rep(1:3, times = 3)</code></pre>
+<pre class="r"><code>rep(1:3, 
+    times = 3)</code></pre>
 <pre><code>## [1] 1 2 3 1 2 3 1 2 3</code></pre>
 <p>While this command repeats each element of the vector 3 times (before passing on to the next element).</p>
-<pre class="r"><code>rep(1:3, each = 3)</code></pre>
+<pre class="r"><code>rep(1:3, 
+    each = 3)</code></pre>
 <pre><code>## [1] 1 1 1 2 2 2 3 3 3</code></pre>
 </div>
 </div>
@@ -184,8 +190,8 @@ list4[2] + list4[4]</code></pre>
 <div id="summary-of-the-video" class="section level3">
 <h3>Summary of the video:</h3>
 <p>The video starts talking about how many times do we need to shuffle the deck of cards to make it random, which means, the cards before the shuffle are totally different just after. As we know, the smaller the deck, the easier is tho get it shuffled randomly, because if the deck is 4 cards, them the number of possibilities is 4! = 4x3x2 = 24.</p>
-<p>But usually we cannot try out all the possibilities. In a complete deck of 52 cards, it means that we have 52! possibilities of sequences of cards, which results in more than 8×10⁶⁷ possibilities.</p>
-<p>Also, the mentioned that if you give an ordered deck of cards to a friend and tell him to shuffle by the common way of shuffling (without seeing while he does), which divides the deck in two parts of almost the same size, and shuffle them and put them together again, you will still have 2^(number of shuffles) rising “small” sequences in the middle of the deck. If your friend mix 3 times, so there’s 8 rising sequences in the deck. And then you do a magic: remove cards one by one. If a card is not in order with the previous card, you start another pile. If it’s in order, you put in the same pile. In the 9th pile is the card that the person has taken.</p>
+<p>But usually we cannot try out all the possibilities. In a complete deck of 52 cards, it means that we have 52! possibilities of sequences of cards, which results in more than 8x10^67 possibilities.</p>
+<p>Also, the mentioned that if you give an ordered deck of cards to a friend and tell him to shuffle by the common way of shuffling (without seeing while he does), which divides the deck in two parts of almost the same size, and shuffle them and put them together again, you will still have 2^(number of shuffles) rising ‘small’ sequences in the middle of the deck. If your friend mix 3 times, so there’s 8 rising sequences in the deck. And then you do a magic: remove cards one by one. If a card is not in order with the previous card, you start another pile. If it’s in order, you put in the same pile. In the 9th pile is the card that the person has taken.</p>
 <p>He affirmed again, practically, the deck is never completely mixed, it is not random. He raised a question: how much do we accept it to be shuffled? It will not be random, but how much do we consider it enough?</p>
 <p>When he cites the on-line poker, he compares that to have a deck really shuffled randomly, you would need to have computer with the capacity to process numbers in the order of 6x10^67, which is far from the possibilities of a computer of 32 bits (2^32 = 4,3 billions possibilities).</p>
 <p>Then, a student asked how about to put the cards on the table and mash them with the hands. He explained that this is efficient and is hard to predict the result or the efficiency of this method because it is hard to model this method, but certainly, with 8x10^67 possibilities, there will be still cards in sequence.</p>
@@ -196,7 +202,7 @@ list4[2] + list4[4]</code></pre>
 </div>
 </div>
 <div id="part-v-a-naive-version-of-the-naive-bayes-classifier" class="section level2">
-<h2>Part V: A naïve version of the Naïve Bayes Classifier</h2>
+<h2>Part V: A naive version of the Naive Bayes Classifier</h2>
 <p>The exercise gives us a table of the historical events of four weather parameters (outlook, temperature, humidity, wind) and, based in these weather conditions, we played tennis or not. Then, knowing the weather condition for today, it asks us if we will play tennis. In other words, based in our past experience with the given condition, i.e. Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong, what is most propable evidence expected?</p>
 <p>We start to compute the total “Yes” and “No” probability. In overall table, how many times we played tennis and how many we did not:</p>
 <pre class="r"><code>P(Play = Yes) = 9/14

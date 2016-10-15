@@ -185,10 +185,36 @@ list4[2] + list4[4]</code></pre>
 <pre><code>## [1] 1 1 1 2 2 2 3 3 3</code></pre>
 </div>
 </div>
-<div id="part-iv-coins-randomness-and-genetics" class="section level2">
-<h2>Part IV: Coins, Randomness and Genetics</h2>
-<div id="summary-of-the-video" class="section level3">
-<h3>Summary of the video:</h3>
+<div id="part-iii-exercises-from-the-blue-book" class="section level1">
+<h1>Part III: Exercises from the blue book</h1>
+<div id="topic-discrete-random-variables-chapter-4" class="section level2">
+<h2>2.Topic: Discrete random variables – Chapter 4</h2>
+<div id="section" class="section level3">
+<h3>4.14</h3>
+<div id="a" class="section level4">
+<h4>a)</h4>
+<p>We can get P(X=2) only if we get one head in the first toss and another head in the second toss. Since the probability of getting a head is p, then: <span class="math display">\[
+P(X=2) = p*p = p^2
+\]</span> In addition, to have 2 heads in 3 tossing, it is necessary to get a tail before the second head. We have to possibilities (HTH,THH). So, <span class="math display">\[
+P(X=3) = p(1-p)p + (1-p)p^2 = 2(1-p)p^2
+\]</span> In the same way, to get 2 heads in 4 tossing, we need to have 2 tails before the second head: (HTTH,TTHH,THTH). Which gives us: <span class="math display">\[
+P(X=4) = p(1-p)(1-p)p + (1-p)(1-p)p^2 + (1-p)p(1-p)p = 3(1-p)^2p^2
+\]</span></p>
+</div>
+<div id="b" class="section level4">
+<h4>b)</h4>
+<p>It is easy to think that in order to get two heads, by any path of the tree of possibilities, we will have a <span class="math inline">\(p^2\)</span> associated in the equation of P(X=n). Furthermore, we will have always (1-n) possible paths to have X=n. Lastly, to have 2 heads in n, firstly we nead to have (n-2) tails before the second head. Of course, getting two heads can only occurs if <span class="math inline">\(n\geq2\)</span>. According to this, we have:</p>
+<p><span class="math display">\[
+P(X=n)=(n-1) p^2 (1-p)^{n-2}, n\geq2
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="part-iv-coins-randomness-and-genetics" class="section level1">
+<h1>Part IV: Coins, Randomness and Genetics</h1>
+<div id="summary-of-the-video" class="section level2">
+<h2>Summary of the video:</h2>
 <p>The video starts talking about how many times do we need to shuffle the deck of cards to make it random, which means, the cards before the shuffle are totally different just after. As we know, the smaller the deck, the easier is tho get it shuffled randomly, because if the deck is 4 cards, them the number of possibilities is 4! = 4x3x2 = 24.</p>
 <p>But usually we cannot try out all the possibilities. In a complete deck of 52 cards, it means that we have 52! possibilities of sequences of cards, which results in more than 8x10^67 possibilities.</p>
 <p>Also, the mentioned that if you give an ordered deck of cards to a friend and tell him to shuffle by the common way of shuffling (without seeing while he does), which divides the deck in two parts of almost the same size, and shuffle them and put them together again, you will still have 2^(number of shuffles) rising ‘small’ sequences in the middle of the deck. If your friend mix 3 times, so there’s 8 rising sequences in the deck. And then you do a magic: remove cards one by one. If a card is not in order with the previous card, you start another pile. If it’s in order, you put in the same pile. In the 9th pile is the card that the person has taken.</p>
@@ -199,7 +225,6 @@ list4[2] + list4[4]</code></pre>
 <p>He explained again that practically nothing is random because we do not try all the possibilities: we do not shuffle the cards enough, we do not toss the coin enough, etc.</p>
 <p>He stated that the problem of lack of randomness in tossing coins is because we use Physics, we can define the position in which the coin will end. If we know the initial condition (head or tail), apply a known force in a known region of the coin, you can know the height that the coin will reach and how many turns it will spin, so you can tell how it will end - tail or head.</p>
 <p>So, he concludes that nothing is completely random.</p>
-</div>
 </div>
 <div id="part-v-a-naive-version-of-the-naive-bayes-classifier" class="section level2">
 <h2>Part V: A naive version of the Naive Bayes Classifier</h2>
@@ -251,6 +276,7 @@ P_Yes</code></pre>
 P_No</code></pre>
 <pre><code>## [1] 0.02057143</code></pre>
 <p>As P_No is greater than P_Yes, we will not play tennis tomorrow.</p>
+</div>
 </div>
 
 

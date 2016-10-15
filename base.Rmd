@@ -68,6 +68,240 @@ rep(1:3,
     each = 3)
 ```
 
+## *Part II:* "Massage" your data.
+
+### a. Reading with `read.delim`
+We used the following 4 parameters.
+
+1. **file:** The name of the file you want to read.
+1. **header:** Binary parameter. If TRUE then the first _row_ of the file is the header. Conversely, if it's FALSE then the first row of the file isn't a header.
+1. **sep:** The character separator in our file. In our case, the character tab ("\t").
+1. **stringsAsFactors:** Binary parameter. If TRUE then every string column will be transformed into data type factor, otherwise it'll remain as character.
+
+```{r}
+youraw = read.delim(file = "you.tsv",
+                    header = TRUE,
+                    sep = "\t",
+                    stringsAsFactors = FALSE)
+
+str(object = youraw)
+```
+
+### b. How many rows and columns does _youraw_ have?
+
+It has 68 rows and 6 columns.
+```{r}
+# Number of rows
+nrow(youraw)
+
+# Number of columns.
+ncol(youraw)
+``` 
+
+### c. What are the names of the columns of youraw?
+
+The names are: 
+
+1. "Where.are.you.from"
+1. "Previous..academic..life"
+1. "How.well.do.you.know..Probability"
+1. "How.well.do.you.know..Statistics"
+1. "How.well.do.you.know..R"                                         
+1. "Besides.R..do.you.fluently.know.use.other.programming.languages."
+
+```{r}
+names(youraw)
+```
+
+### d. What is the value of row 7, column 5 of youraw?
+
+The value is 3.
+
+```{r}
+youraw[7, 5]
+```
+
+### e. Display the second row of youraw in its entirety.
+
+```{r}
+youraw[2, ]
+```
+
+### f. Now explain what this command does:
+
+```{r}
+youclean <- youraw
+names(youclean)
+```
+
+We make a copy of the list and called it ```youclean```. Then, we run the command ```names(youclean)``` which changes the name of the columns given the entry array. 
+
+```{r}
+names(youclean) <- c("where", "prev.life", "good.prob", "good.stat", "good.R", "other.lan")
+names(youclean)
+```
+
+### g. Creation of two new variables ```lan1``` and ```lan2```
+
+**The Task:**
+
+The goal is to create two new variables inside the dataset youclean – named ```lan1``` and ```lan2```
+– which contains the first two options listed in other.lan. In case less than two options are provided,
+fill in the new variables with NA as needed.
+
+**Solution:**
+
+Our approach consist in creating a ```base``` array of programming languages and use string manipulation functions to find matches of all elements in the ```base``` array. Then, we sort the matches and pick the first 2 elements. Finally, if there are less than 2 matches we fill the NA's as needed.
+
+We decided this instead of different approaches for several reasons:
+
+1. The task is to find **programming languages**. As a result, the are 7 cases where the _technology_ described **are not** programming languages. These are:
+
+    * **[Turbo pascal](http://turbopascal.org/):** Is an IDE which has a compiler for the programming language pascal. Therefore, we added pascal as a possible language in ```base```.
+    * **[MySQL](http://www.mysql.com/):** Is a relational database management system (RDBMS) which uses SQL that is known to be turing complete, therefore we added sql as the programming language.
+    * **[Android](https://www.android.com/):** Is a Mobile Operating System in which you need several languages to develop applications. Therefore, we did not add a programming language with android.
+    * **[Windows](https://www.microsoft.com/it-it/):** Is an Operating System that can be related to multiple programming languages. In this case, we did not add a programming language 
+    * **[LabView](http://www.ni.com/labview/i/):** Is a System Design Software designed for a graphical programming language called (G). As a result we added G as a possible programming language.
+    * **CSS** and **XML**: CSS is a style sheet language used for describing the presentation of a document written in a markup language [Wikipedia/CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) and XML is a markup language that defines a set of rules for encoding documents in a format that is both human-readable and machine-readable [Wikipedia/XML](https://en.wikipedia.org/wiki/XML). By their own, CSS and XML are not programming languages they can be consideredas such if they work together with HTML ([Example of interaction between HTML and CSS](http://eli.fox-epste.in/rule110/)). We decided, however, not to include them in our programming languages array ```base```.
+    
+1. There is not a clear structure of the answers given by the students. We can find indeed several patterns such as:
+
+    * They usually responded Yes or No at the beginning of the sentence.
+    * They usually separated the languages with commas.
+    * Sometimes, they added text before or after the programming languages.
+    * Everyone wrote ```C++``` which may have problems with regular expressions. Therefore, we changed to ```cpp```. 
+    
+    
+1. In the future, we think that if the number of students increases the chance of getting an unusual pattern is high. Therefore, with our ```base``` array we just need to add a new programming language to the array if we have not seen it before.
+
+    * **Note:** The proper solution should be finding a file with _all_ the programming languages and load it everytime we run our algorithm. We found this [List of Programming Languages](https://en.wikipedia.org/wiki/List_of_programming_languages). We could have made the list but instead we decided just to put the languages used in our scope.
+    
+1. Finally, even though our solution may be in theory slower than another approaches. We expect student's answers to be short.
+
+```{r}
+# Array of languages
+languages = c("cpp", "matlab", "bash","js", "javascript","java", "sql", "c", "sas", "python", "objective-c",  "pascal", "ruby", "html", "php", "shell", "assembly", "c#", "pl-sql")
+
+# New columns to youclean
+lan1arr = character()
+lan2arr = character()
+
+# Preprocessing: Transforming languages to proper syntax.
+answers = tolower(youclean$other.lan)
+answers = gsub("pl/sql", "pl-sql", answers)
+answers = gsub("objective c", "objective-c", answers)
+answers = gsub("c\\+\\+", "cpp", answers)
+answers = gsub("mysql", "sql", answers)
+
+# Substitution of special characters to whitespace
+answers = gsub("\\,", " ", answers)
+answers = gsub("\\."," ", answers)
+answers = gsub("/"," ", answers)
+answers = gsub("!"," ", answers)
+
+for(answer in answers){
+  # Assuming minimum positions 99999
+  min_1 = 99999
+  min_2 = 99999
+  
+  # Default languages as NA
+  lan1 = NA
+  lan2 = NA
+  
+  # Split every answer in whitepaces
+  for(chunk in strsplit(answer, " ")[[1]]){
+    
+    # Trim eliminates whitespaces on the left and right of string.
+    chunk = trimws(chunk)
+    
+    # For every language, we search if exists in every chunk
+    for(language in languages){
+       
+      # Returns the position of the occurrence of the language in the chunk, -1 otherwise 
+      position = regexpr(language, chunk, fixed=TRUE)
+      
+      # If the language exists in the chunk and has the same length as the chunk
+       if(position[1]>-1 && nchar(chunk) == nchar(language)){
+         
+        # In case the position is lower than our minimum, update min_1 and min_2
+        if(position[1] < min_1){
+          min_2 = min_1
+          lan2 = lan1
+          
+          min_1 = position[1]
+          lan1 = language 
+          
+          # If we find 1 language it's impossible to find another in the chunk.
+          break
+        }else if(position[1] < min_2){
+          min_2 = position[1]
+          lan2 = language
+          
+          # BIS
+          break
+        }
+      }
+    }  
+  }
+  
+  # Update arrays.
+  lan1arr = c(lan1arr, lan1)
+  lan2arr = c(lan2arr, lan2)
+}
+
+# Create new columns
+youclean$lan1 = lan1arr
+youclean$lan2 = lan2arr
+```
+
+### h. Very (not) last step: Data Types.
+
+1. Run the following code on your data and explain what it does:
+
+    * **class:**  Used to define or identify what "type" an object is from the point of view of object-oriented programming in R.
+    * **typeof:** Determines the (R internal) type or storage mode of any object.
+    * **mode:** Get or set the type or storage mode of an object.
+
+    According to the [Manual of R](http://stat.ethz.ch/R-manual/R-devel/doc/manual/R-lang.html#Objects) the main difference between **typeof** and **mode** is that _mode gives information about the mode of an object in the sense of Becker, Chambers & Wilks (1988), and is more compatible with other implementations of the S language_. Conversely, **typeof** gives the type of the object from R internal point of view.
+
+1. Explain the difference you see between the first three and the last three lines of code.
+
+    In the first three lines, the type, class and mode of the column **where** were the same (character). This means that every entry of every row of the column **where** is stored as plain text. In contrast, when we transformed the column with function ```as.factor``` we changed the R class to **factor**, the R internal type of storage to **integer** and the type of the object in the sense of S to **numeric**. 
+
+    This said, the ```as.factor``` function transform the object to a list of interger where every integer is mapped to a list of trings containing the original data. 
+
+```{r}
+# Before
+class(youclean$where)
+typeof(youclean$where)
+mode(youclean$where)
+
+# Change to factor
+youclean$where <- as.factor(youclean$where)
+levels(youclean$where)
+nlevels(youclean$where)
+```
+
+```{r}
+# After
+class(youclean$where)
+typeof(youclean$where)
+mode(youclean$where)
+```
+
+Recycle the relevant part of this code to turn into factors also prev.life
+
+```{r}
+youclean$prev.life <- as.factor(youclean$prev.life)
+```
+
+### i: Saving file
+Using ```save``` command to save our data youclean and youraw. 
+
+```{r}
+save(youclean, youraw, file="you.RData")
+```
+
 # Part III: Exercises from the blue book
 
 ## 2.Topic: Discrete random variables – Chapter 4

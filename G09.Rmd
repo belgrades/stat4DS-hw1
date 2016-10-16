@@ -10,12 +10,17 @@ output:
 
 # Explanation of solution
 
+## Structure
+
 We submitted the whole homework in one .Rmd. In the directory, you'll find 2 folders, 1 .Rmd and the tsv file:
 
-1. images: Images for the generation of the .html.
-1. src: Various independent files which helped to do the simulation and create the images used in this .Rmd.
-1. G09.Rmd: This file
-1. you.tsv: The tab separated values used in part II.
+1. **images:** Images for the generation of the .html.
+1. **src:** Various independent files which helped to do the simulation and create the images used in this .Rmd.
+1. **G09.Rmd:** This file
+1. **you.tsv:** The tab separated values used in part II.
+
+## Repository
+To fork repository or download a pdf version of this .Rmd go to [stat4DS-hw1](https://github.com/belgrades/stat4DS-hw1) 
 
 # Part I: R Syntax & Functions
 ## a. Explain errors or non-erroneous result.

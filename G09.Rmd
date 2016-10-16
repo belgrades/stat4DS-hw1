@@ -3,9 +3,9 @@ title: "HW1"
 author: "Gabriel Nespoli | Fernando Crema | Mauricio Fadel Argerich"
 date: "October 9, 2016"
 output:
- html_document:
-    toc: true
+  html_document:
     theme: united
+    toc: yes
 ---
 
 # Explanation of solution

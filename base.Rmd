@@ -726,7 +726,7 @@ print("HTT: ",mean(HTT), var(HTT))
 ```
 
 
-```{r engine='python' eval=FALSE}
+```{r engine='python', eval=FALSE}
 from random import random
 from numpy import mean, std, var, float64
 # Automata for 'HTH'
@@ -753,7 +753,8 @@ for exp in range(experiments):
         coin = 'H' if random() < 0.5 else 'T'       
         state = (automata[state], coin)
     HTH.append(steps)
-    
+
+# Shame on Donald Knuth    
 print('HTH: ',mean(HTH, dtype=float64), var(HTH, dtype=float64))
 ```
 
@@ -762,9 +763,30 @@ One run of both algorithms may show an output like
 1. ('HTT: ', 8.0010999999999992, 24.029398789999998)
 1. ('HTH: ', 10.01468, 58.009584497599995)
 
-**Second conclussion**: If we run our codes multiple times we concluded that the average number of tosses until we get the string $\text{[HTT]}$ is $\approx 8$ and the variance is $\approx 24$. However, for string $\text{[HTH]}$ the average number of tosses is $\approx 10$ and the variance is $\approx 58$. We then have strong empirical evidence that the average number of tosses until string $\text{[HTH]}$ is larger than until $\text{[HTT]}$. 
+**Second conclussion**: If we run our codes multiple times we concluded that the average number of tosses until we get the string $\text{[HTT]}$ is $\approx 8$ and the variance is $\approx 24$. However, for string $\text{[HTH]}$ the average number of tosses is $\approx 10$ and the variance is $\approx 58$. We then have a strong empirical evidence that the average number of tosses until string $\text{[HTH]}$ is larger than until $\text{[HTT]}$. 
+
+#### A markov chain approach.
+We may analyze our automaton as a Markov process in which the probability of transition between every state is the probability of obtaining characters $\text{H}$ or $\text{T}$. The transition matrices for both automatons are:
+
+![Automaton for HTH string](trans_hth.PNG)
+
+![Automaton for HTH string](trans_htt.PNG)
+
+In both cases, we have an absorbent state $q_f$ in which the probability of staying in the state is 1 when we arrive to this state and transient states $\left \{q_0, q_1, q_2 \right \}$. Read [Classification of states](https://www.math.ucdavis.edu/~gravner/MAT135B/materials/ch13.pdf) for further information about classification of states.
+
+This said, we investigated and this type of matrices are called Absorbent Markov Chains. In the chapter III of [Finite Markov Chains](http://www.springer.com/us/book/9780387901923),(Kennedy and Snell, 1976, Springer-Velag). We found several theorems which lead to 3 important calculations:
+
+1. The fundamental matrix $N$ is obtained using $N= \left(I_t -Q \right)^-1$. Where $Q$ is the transition matrix of the transient states $\left \{q_0, q_1, q_2 \right \}$.
+1. The expected number of steps before being absorbed when starting in transient state $i$ is the ith entry of the vector: $t = N \cdot 1$ with $1$ a 1 column vector.
+1. The variance on the number of steps before being absorbed when starting in transient state $i$ is the ith entry of the vector: $2\left( 2N -I_t\right)t-t_{sq}$ where $t_{sq}$ is the [Hadamard Product](http://buzzard.ups.edu/courses/2007spring/projects/million-paper.pdf) of $t$ with itself.
+
+Now, lets see the calculations for the string  $\text{[HTT]}$:
 
 
+
+
+
+ 
 # **Part V:** A naive version of the Naive Bayes Classifier
 The exercise gives us a table of the historical events of four weather parameters (outlook, temperature, humidity, wind) and, based in these weather conditions, we played tennis or not. Then, knowing the weather condition for today, it asks us if we will play tennis. In other words, based in our past experience with the given condition, i.e. Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong, what is most propable evidence expected?
 

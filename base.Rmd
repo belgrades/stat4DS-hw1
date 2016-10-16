@@ -2,7 +2,10 @@
 title: "HW1"
 author: "Gabriel Nespoli | Fernando Crema | Mauricio Fadel Argerich"
 date: "October 9, 2016"
-output: html_document
+output:
+ html_document:
+    toc: true
+    theme: united
 ---
 
 ## Part I: R Syntax & Functions
@@ -304,7 +307,208 @@ save(youclean, youraw, file="you.RData")
 
 # Part III: Exercises from the blue book
 
+## Definitions and properties:
+
+Some definitions and properties will be used on the exercises. Each reference will be used given the number here.
+
+$\text{(1) }\forall E,F \in \Omega \text{ we have } E^{c}\cap F^{c} = \left ( E\cup F \right )^{c} \\ \text{(2) }\forall E,F \in \Omega \text{ we have } E^{c}\cup F^{c} = \left ( E\cap F \right )^{c}  \\ \text{(3) }\forall A \in \Omega \text { we have }\mathbb{P} \left( A^{c} \right) = 1 - \mathbb{P} \left( A \right) \\ \text{(4) } \forall A,B \in \Omega \text{ we have } \mathbb{P}\left ( A\cup B \right )=\mathbb{P}\left ( A \right )+\mathbb{P}\left ( B \right )-\mathbb{P}\left ( A\cap B \right )\\ \text{(5) } \forall A,B \in \Omega \text{ with } \mathbb{P}\left( B \right) > 0 \text{ we have } \mathbb{P}\left(A | B\right) = \displaystyle \frac{\mathbb{P}\left( A \cap B\right)}{\mathbb{P}\left( B \right) }$
+
+## **1. Probability basics – Chapters 2 & 3**
+
+### Problem 2.2
+
+Let $E$ and $F$ be two events for which one knows that the probability that at least one of them occurs is $\frac{3}{4}$. What is the probability that neither E nor F occurs? Hint: use one of DeMorgan’s laws: $E^{c}\cap F^{c} = \left ( E\cup F \right )^{c}$.
+
+#### Solution:
+$$\text{We know: } \mathbb{P}\left ( E\cup F \right ) = \frac{3}{4} \text{. So,}$$
+
+$$
+\begin{aligned}
+  \mathbb{P}\left ( E^{c}\cap F^{c} \right ) = & \mathbb{P}\left ( \left ( E\cup F \right )^{c} \right) && \text{(1)}  \\
+  = & 1 - \mathbb{P}\left ( E\cup F \right ) && \text{(3)} \\ 
+  = & 1 - \frac{3}{4}  = \frac{1}{4}
+\end{aligned}
+$$
+
+
+### Problem 2.6
+
+When $\mathbb{P}\left ( A \right ) = \frac{1}{3}, \mathbb{P}\left ( B \right ) = \frac{1}{2} \text{ and } \mathbb{P}\left ( A \cup B \right ) = \frac{3}{4}$ what is:
+
+a. $\mathbb{P}\left ( A\cap B \right )$?
+b. $\mathbb{P}\left ( A^{c}\cup B^{c} \right )$?
+
+#### Solution:
+
+a. 
+$$
+  \begin{aligned}
+    \mathbb{P}\left ( A\cap B \right ) = & \mathbb{P}\left ( A \right ) + \mathbb{P}\left ( B \right ) - \mathbb{P}\left ( A\cup B \right )&& \text{ (4) } \\
+    = & \frac{1}{3}+\frac{1}{2}-\frac{3}{4} = \frac{1}{12} \approx 0.083
+  \end{aligned}
+$$
+
+b.
+$$
+ \begin{aligned}
+  \mathbb{P}\left ( A^{c}\cup B^{c} \right ) 
+    = & \mathbb{P}\left ( \left ( A\cap B \right )^{c} \right ) && \text{ (2)} \\
+    = &1-\mathbb{P}\left( A\cap B \right ) && \text{ (3)}  \\
+    = &1-\frac{1}{12} = \frac{11}{12} \approx  0.917
+ \end{aligned}
+$$
+
+### Problem 2.9
+
+We toss a coin three times. For this experiment we choose the sample space:
+
+$$\Omega = \left \{HHH, THH, HTH, HHT, TTH, THT, HTT, TTT \right \}$$
+
+where $T$ stands for tails and $H$ for heads.
+
+a. Write down the set of outcomes corresponding to each of the following events:
+
+    $A: ``\text{we throw the tails exactly two times"} \\ B: ``\text{We throw tails at least two times"} \\ C: ``\text{tails did not appear before a head appeared"} \\ D: ``\text{The first result throw results in tails"}$
+    
+b. Write down the set of outcomes corresponding to each of the following events: $A^{c}$, $A \cup \left(C \cap D \right)$, and $A \cap D^{c}$.
+
+#### Solution
+
+a. $$ $$
+    
+    $A=\left \{ HTT,THT,TTH \right \} \\ B=\left \{ HTT,THT,TTH,TTT \right \} \\ C=\left \{ HHH,HTT,HTH \right \} \\ D=\left \{ THH,THT,TTT,TTH \right \}$
+
+b. $$ $$
+    $\\ \begin{aligned} A^{c}= & \Omega - A \\ = & \left \{HHH, THH, HTH, HHT, TTH, THT, HTT, TTT \right \} - \left \{ HTT,THT,TTH \right \} \\ = & \left \{ HHH,THH,HTH,HHT,TTT \right \} \end{aligned}$
+        
+    $\begin{aligned}A\cup (C\cap D)= & \left \{ HTT,THT,TTH \right \}\cup \left ( \left \{ HHH,HTT,HTH \right \}\cap \left \{ THH,THT,TTT,TTH \right \} \right ) \\ = &\left \{ HTT,THT,TTH \right \}\cup \emptyset \\ = & \left \{ HTT,THT,TTH \right \} \end{aligned}$
+        
+    $\begin{aligned} A\cap D^{c}= & \left \{ HTT,THT,TTH \right \}\cap \left \{ HHH,HTT,HTH,HHT \right \} \\ = &\left \{ HTT \right \} \end{aligned}$
+    
+### Problem 3.5
+
+A ball is drawn at random from an urn containing one red and one white ball. If the white ball is drawn, it is put back into the urn. If the red ball is drawn, it is returned to the urn together with two more red balls. Then a second draw is made. What is the probability a red ball was drawn on both the first and the second draws?
+
+#### Solution
+
+Given the experiment, we have the events:
+
+$\\ R_{1} = \left \{ \text{Draw of red ball in first attempt} \right \} \\ R_{2} = \left \{\text{Draw of red ball in second attempt} \right \}$
+
+We know that: $\mathbb{P}\left ( R_{1} \right ) = \displaystyle \frac{1}{2} \text{ and }\mathbb{P}\left ( R_{2} | R_{1}\right ) = \displaystyle \frac{3}{4}$
+
+We need to calculate: $\mathbb{P}\left ( R_{1} \cap R_{2} \right )$
+$$
+  \begin{aligned}
+    \mathbb{P}\left( R_{1} \cap R_{2} \right) = & \mathbb{P}\left(R_{1}\right) \cdot \mathbb{P}\left(R_{2} \mid R_{1}\right) && \text{ (5)} \\ 
+ & = \frac{1}{2} \cdot \frac{3}{4} = \frac{3}{8} = 0.375
+  \end{aligned}
+$$
+
+
+### Problem 3.10
+
+A student takes a multiple-choice exam. Suppose for each question he either knows the answer or gambles and chooses an option at random. Further suppose that if he knows the answer, the probability of a correct answer is 1, and if he gambles this probability is $\frac{1}{4}$. To pass, students need to answer at least 60% of the questions correctly. The student has “studied for a minimal pass,” i.e., with probability 0.6 he knows the answer to a question. Given that he answers a question correctly, what is the probability that he actually knows the answer?
+
+#### Solution
+
+We have the events:
+
+$\\C: ``\text{Answering a question correctly"} \\K: ``\text{Knowing the answer to a question""}$
+
+We know that: $\mathbb{P}\left ( K \right ) = 0.6 \rightarrow \mathbb{P}\left ( K^{c} \right ) = 0.4 \text{, } \mathbb{P}\left ( C\mid K \right ) = 1 \text{ and }\mathbb{P}\left ( C\mid K^{c} \right ) = \frac{1}{4}$
+
+
+We need to calculate: $\mathbb{P}\left ( K\mid C \right )$
+
+$$
+  \begin{aligned}
+    \mathbb{P}\left ( K\mid C \right ) = & \frac{\mathbb{P}\left ( K \right ) \cdot \mathbb{P}\left ( C\mid K \right )}{\mathbb{P}\left ( C \right )} \\
+    = & \frac{\mathbb{P}\left ( K \right ) \cdot \mathbb{P}\left ( C\mid K \right )}{\mathbb{P}\left ( K \right ) \cdot
+\mathbb{P}\left ( C\mid K \right ) + \mathbb{P}\left ( K^{c} \right) \cdot \mathbb{P}\left( C\mid K^{c} \right )} \\
+= &  \frac{1 \cdot 0.6}{1 \cdot 0.6 + 0.25 \cdot 0.4} = \frac{6}{7} \approx 0.857
+  \end{aligned}
+$$
+
+
+### Problem 3.11
+
+A breath analyzer, used by the police to test whether drivers exceed the legal limit set for the blood alcohol percentage while driving, is known to satisfy:
+
+$$ \mathbb{P}\left(A \mid B \right) = \mathbb{P}\left( A^{c} \mid B^{c} \right) = p$$
+
+where $A$ is the event “breath analyzer indicates that legal limit is exceeded” and $B$ “driver’s blood alcohol percentage exceeds legal limit.” On Saturday night about 5% of the drivers are known to exceed the limit.
+
+a. Describe in words the meaning of $\mathbb{P}\left( B^{c} \mid A\right)$.
+b. Determine $\mathbb{P}\left( B^{c} \mid A\right)$ if $p=0.95$.
+c. How big should $p$ be so that $\mathbb{P} \left( A \mid B\right)=0.9$. 
+
+#### Solution
+
+a. $\mathbb{P}\left ( B^{c}\mid A \right ) =$ "Probability that the blood of the driver doesn't exceed the legal limit given that the breath analyzer indicates it does"
+
+b. We have the events:
+
+    $\\A: ``\text{breath analyzer indicates that legal limit is exceeded"} \\B: ``\text{driver’s blood alcohol percentage exceeds legal limit."}$
+    
+    We know that: $\mathbb{P}\left(A \mid B \right) = \mathbb{P}\left( A^{c} \mid B^{c} \right) = p \text{ }$ Therefore, $\mathbb{P}\left(A^{c} \mid B \right) = \mathbb{P}\left( A \mid B^{c} \right) = 1-p \text{ using (3)}$
+    
+    With $p=0.05$ we have $\mathbb{P}\left(A \mid B \right) = \mathbb{P}\left( A^{c} \mid B^{c} \right) = 0.05 \text{ }$ and $\mathbb{P}\left(A^{c} \mid B \right) = \mathbb{P}\left( A \mid B^{c} \right) = 0.95$
+    
+    Assuming that behaviour on Saturdays remains in the whole week we have that: $\mathbb{P}\left(B\right) = 0.05$ and $\mathbb{P}\left(B^{c}\right) = 0.95$ 
+    
+    We need to calculate: $\mathbb{P}\left ( B^{c}\mid A \right )$
+
+    $$
+    \begin{aligned}
+      \mathbb{P}\left ( B^{c}\mid A \right ) = & \frac{\mathbb{P}\left ( A\mid B^{c} \right )\cdot \mathbb{P}\left ( B^{c} \right )}{\mathbb{P}\left ( A \right )}\\
+       = & \frac{\mathbb{P}\left ( A\mid B^{c} \right )\cdot \mathbb{P}\left ( B^{c} \right )}{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right ) + \mathbb{P}\left ( A\mid B^{c} \right )\cdot \mathbb{P}\left ( B^{c} \right )} \\
+       = & \frac{\left ( 1 - \mathbb{P}\left ( A^{c}\mid B^{c} \right ) \right )\cdot \left ( 1 - \mathbb{P}\left ( B \right ) \right )}{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right ) + 
+    \left ( 1 - \mathbb{P}\left ( A^{c}\mid B^{c} \right ) \right )\cdot \left ( 1 - \mathbb{P}\left ( B \right ) \right )} \\
+     = & \frac{\left ( 1 - 0.95 \right )\cdot \left ( 1 - 0.05 \right )}{0.95\cdot 0.05 + \left ( 1 - 0.95 \right )\cdot \left ( 1 - 0.05 \right )} = 0.5
+    \end{aligned}
+    $$
+
+c. Assuming same scenario than in b. (but $p=0.95$) we now need to find how big should $p$ be so that $\mathbb{P} \left( A \mid B\right)=0.9$.
+
+    We need $p$ such that $\mathbb{P} \left( A \mid B\right)=0.9$
+
+$$
+\begin{aligned}
+  \\\mathbb{P}\left ( B\mid A \right ) = & \frac{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right )}{\mathbb{P}\left ( A \right )}\\
+  = & \frac{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right )}{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right ) + \mathbb{P}\left ( A\mid B^{C} \right )\cdot \mathbb{P}\left ( B^{C} \right )} \\ 
+  = & \frac{p\cdot \mathbb{P}\left ( B \right )}{p\cdot \mathbb{P}\left ( B \right ) + \left ( 1 - p \right )\cdot \mathbb{P}\left ( B^{C} \right )}\\
+  0.90 = & \frac{p\cdot 0.05}{p\cdot 0.05 + \left ( 1 - p \right )\cdot 0.95}\\
+  0.90 \cdot \left ( p\cdot 0.05 + \left ( 1 - p \right )\cdot 0.95 \right ) = & p\cdot 0.05\\
+  0.90 \cdot \left ( -0.90 \cdot p + 0.95 \right ) = & 0.05 \cdot p \\
+  -0.81 \cdot p + 0.855 = & 0.05 \cdot p\\
+  0.855 = 0.05 \cdot p + 0.81 \cdot p\\
+  0.855 = 0.86 \cdot p\\
+  \frac{0.855}{0.86} = & p\\
+  \frac{171}{172} = & p
+\end{aligned}
+$$
+
+
+### 3.18
+
+$$
+\begin{equation}
+
+\end{equation}
+$$
+
+
 ## 2.Topic: Discrete random variables – Chapter 4
+
+### 4.2
+
+### 4.11
+
+The probability of winning one contest is independent to the probability of winning the other. Also, the probability of winning in any month is independent of the previous ones, so M has a geometric distribution with parameters:
+
+$$\\p = p_{1} \cdot p_{2} + p_{1} (1 - p_{2})+ p_{2} (1 - p_{1})$$ 
+
 ### 4.14
 #### a) 
 We can get P(X=2) only if we get one head in the first toss and another head in the second toss. Since the probability of getting a head is p, then:
@@ -349,7 +553,7 @@ He stated that the problem of lack of randomness in tossing coins is because we 
 
 So, he concludes that nothing is completely random.
 
-## Part V: A naive version of the Naive Bayes Classifier
+# **Part V:** A naive version of the Naive Bayes Classifier
 The exercise gives us a table of the historical events of four weather parameters (outlook, temperature, humidity, wind) and, based in these weather conditions, we played tennis or not. Then, knowing the weather condition for today, it asks us if we will play tennis. In other words, based in our past experience with the given condition, i.e. Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong, what is most propable evidence expected?
 
 We start to compute the total "Yes" and "No" probability. In overall table, how many times we played tennis and how many we did not:

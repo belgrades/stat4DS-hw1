@@ -8,8 +8,8 @@ output:
     theme: united
 ---
 
-## Part I: R Syntax & Functions
-### a.
+# Part I: R Syntax & Functions
+## a. Explain errors or non-erroneous result.
 The command creates a vector with 4 elements that are characters.
 ```{r}
 vector1 <- c("5", "12", "7", "32")
@@ -27,7 +27,7 @@ The command produces an error because it's not possible to sum a vector which el
 sum(vector1)
 ```
 
-### b.
+## b. Series of commands.
 The commands don't work. Because the first element of the vector is a character, all the elements in the vector are changed to the most "generic" type of data of its elements which in this case is characters. So when we try to add the second and third element, R tells us it's not possible to add non-numeric arguments, because they're characters.
 ```{r eval=FALSE}
 vector2 <- c("5", 7, 12) 
@@ -45,7 +45,7 @@ list4[[2]] + list4[[4]]
 list4[2] + list4[4]
 ```
 
-### c.
+## c. Using command ```seq```. 
 From 1 to 10000 in increments of 372.
 ```{r}
 seq(from = 1,
@@ -59,7 +59,7 @@ seq(from = 1,
     length.out = 50)
 ```
 
-### d.
+## d. Using command ```rep```.
 This command repeats the whole vector 3 times in order.
 ```{r}
 rep(1:3, 
@@ -71,9 +71,9 @@ rep(1:3,
     each = 3)
 ```
 
-## *Part II:* "Massage" your data.
+# *Part II:* "Massage" your data.
 
-### a. Reading with `read.delim`
+## a. Reading with `read.delim`
 We used the following 4 parameters.
 
 1. **file:** The name of the file you want to read.
@@ -90,7 +90,7 @@ youraw = read.delim(file = "you.tsv",
 str(object = youraw)
 ```
 
-### b. How many rows and columns does _youraw_ have?
+## b. How many rows and columns does _youraw_ have?
 
 It has 68 rows and 6 columns.
 ```{r}
@@ -101,7 +101,7 @@ nrow(youraw)
 ncol(youraw)
 ``` 
 
-### c. What are the names of the columns of youraw?
+## c. What are the names of the columns of youraw?
 
 The names are: 
 
@@ -116,7 +116,7 @@ The names are:
 names(youraw)
 ```
 
-### d. What is the value of row 7, column 5 of youraw?
+## d. What is the value of row 7, column 5 of youraw?
 
 The value is 3.
 
@@ -124,13 +124,13 @@ The value is 3.
 youraw[7, 5]
 ```
 
-### e. Display the second row of youraw in its entirety.
+## e. Display the second row of youraw in its entirety.
 
 ```{r}
 youraw[2, ]
 ```
 
-### f. Now explain what this command does:
+## f. Now explain what this command does:
 
 ```{r}
 youclean <- youraw
@@ -144,15 +144,15 @@ names(youclean) <- c("where", "prev.life", "good.prob", "good.stat", "good.R", "
 names(youclean)
 ```
 
-### g. Creation of two new variables ```lan1``` and ```lan2```
+## g. Creation of two new variables ```lan1``` and ```lan2```
 
-**The Task:**
+### The Task
 
 The goal is to create two new variables inside the dataset youclean – named ```lan1``` and ```lan2```
 – which contains the first two options listed in other.lan. In case less than two options are provided,
 fill in the new variables with NA as needed.
 
-**Solution:**
+### Solution
 
 Our approach consist in creating a ```base``` array of programming languages and use string manipulation functions to find matches of all elements in the ```base``` array. Then, we sort the matches and pick the first 2 elements. Finally, if there are less than 2 matches we fill the NA's as needed.
 
@@ -257,7 +257,7 @@ youclean$lan1 = lan1arr
 youclean$lan2 = lan2arr
 ```
 
-### h. Very (not) last step: Data Types.
+## h. Very (not) last step: Data Types.
 
 1. Run the following code on your data and explain what it does:
 
@@ -298,7 +298,7 @@ Recycle the relevant part of this code to turn into factors also prev.life
 youclean$prev.life <- as.factor(youclean$prev.life)
 ```
 
-### i: Saving file
+## i: Saving file
 Using ```save``` command to save our data youclean and youraw. 
 
 ```{r}
@@ -617,7 +617,9 @@ b.
 We know that we throw the coin until the second head appears. Given $n$ the number of throws, we will always have $2$ heads and $n-2$ tails. The probability of each event that has 2 heads and $n-2$ tails is given by $p^2 \cdot (1-p)^{n-2}$ assuming independence in each throw. Lastly, we need to count how many of these events exist. To do this, is important to notice that we end our experiment when we get our second head, as a result, the last throw will **always** be a head. Therefore, we need to count the ways 1 head and $n-2$ tails can be obtained in the first $n-1$ throws. This problem is equivalent to assign a position to the head given the $n-1$ spots available. This said, we need the number of subsets of size 1 from a set of size $n-1$ which is ${n-1 \choose 1}=n-1$. Finally, we have that $P(X=n)=(n-1) p^2 (1-p)^{n-2}$ with $n\geq2$.
 
 # Part IV: Coins, Randomness and Genetics
+
 ##Summary of the video:
+
 The video starts talking about how many times do we need to shuffle the deck of cards to make it random, which means, the cards before the shuffle are totally different just after. As we know, the smaller the deck, the easier is tho get it shuffled randomly, because if the deck is 4 cards, them the number of possibilities is 4! = 4x3x2 = 24.
 
 But usually we cannot try out all the possibilities. In a complete deck of 52 cards, it means that we have 52! possibilities of sequences of cards, which results in more than $8x10^{67}$ possibilities.

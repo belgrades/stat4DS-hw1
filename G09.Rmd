@@ -8,6 +8,15 @@ output:
     theme: united
 ---
 
+# Explanation of solution
+
+We submitted the whole homework in one .Rmd. In the directory, you'll find 2 folders, 1 .Rmd and the tsv file:
+
+1. images: Images for the generation of the .html.
+1. src: Various independent files which helped to do the simulation and create the images used in this .Rmd.
+1. G09.Rmd: This file
+1. you.tsv: The tab separated values used in part II.
+
 # Part I: R Syntax & Functions
 ## a. Explain errors or non-erroneous result.
 The command creates a vector with 4 elements that are characters.

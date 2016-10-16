@@ -616,9 +616,9 @@ In addition, to have 2 heads in 3 tosses, it is necessary to get a tail before t
 b. 
 We know that we throw the coin until the second head appears. Given $n$ the number of throws, we will always have $2$ heads and $n-2$ tails. The probability of each event that has 2 heads and $n-2$ tails is given by $p^2 \cdot (1-p)^{n-2}$ assuming independence in each throw. Lastly, we need to count how many of these events exist. To do this, is important to notice that we end our experiment when we get our second head, as a result, the last throw will **always** be a head. Therefore, we need to count the ways 1 head and $n-2$ tails can be obtained in the first $n-1$ throws. This problem is equivalent to assign a position to the head given the $n-1$ spots available. This said, we need the number of subsets of size 1 from a set of size $n-1$ which is ${n-1 \choose 1}=n-1$. Finally, we have that $P(X=n)=(n-1) p^2 (1-p)^{n-2}$ with $n\geq2$.
 
-# Part IV: Coins, Randomness and Genetics
+# **Part IV:** Coins, Randomness and Genetics
 
-##Summary of the video:
+## Summary of the video
 
 The video starts talking about how many times do we need to shuffle the deck of cards to make it random, which means, the cards before the shuffle are totally different just after. As we know, the smaller the deck, the easier is tho get it shuffled randomly, because if the deck is 4 cards, them the number of possibilities is 4! = 4x3x2 = 24.
 
@@ -639,6 +639,29 @@ He explained again that practically nothing is random because we do not try all 
 He stated that the problem of lack of randomness in tossing coins is because we use Physics, we can define the position in which the coin will end. If we know the initial condition (head or tail), apply a known force in a known region of the coin, you can know the height that the coin will reach and how many turns it will spin, so you can tell how it will end - tail or head.
 
 So, he concludes that nothing is completely random.
+
+## Coin tosses
+
+Now imagine tossing a coin successively, and waiting till the first time a particular pattern appears, say
+$\text{[HTT]}$. For example, if the sequence of tosses was:
+
+\[\text{HHTHHTH[HTT]HHTTTHTH}\]
+
+The pattern $\text{[HTT]}$ would first appear after the 10th toss. 
+
+Now, consider these two different patterns $\text{[HTH]}$ and $\text{[HTT]}$.
+
+In your opinion which of the following three options is true:
+
+1. The average number of tosses until $\text{[HTH]}$ is **larger** than that until $\text{[HTT]}$.
+2. The average number of tosses until $\text{[HTH]}$ is **the same** as that until $\text{[HTT]}$.
+3. The average number of tosses until $\text{[HTH]}$ is **smaller** than that until $\text{[HTT]}$.
+
+### Solution
+
+At first sight, it seems that the answer should be **the same** because, assuming independence and a balanced coin, the probability of both patterns is the same: $\frac{1}{8}$. However, we'll show in 3  different ways that the average number of tosses until $\text{[HTH]}$ is actually **larger**  than that until $\text{[HTT]}$.
+
+#### A computational approach
 
 # **Part V:** A naive version of the Naive Bayes Classifier
 The exercise gives us a table of the historical events of four weather parameters (outlook, temperature, humidity, wind) and, based in these weather conditions, we played tennis or not. Then, knowing the weather condition for today, it asks us if we will play tennis. In other words, based in our past experience with the given condition, i.e. Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong, what is most propable evidence expected?

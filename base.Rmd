@@ -532,17 +532,38 @@ $$But, by definition $\mathbb{P}\left(B\right)<1$. Therefore, if $A$ and $B$ are
 
 ### 4.2
 
-### PRoblem 4.11
+### Problem 4.11
 
-The probability of winning one contest is independent to the probability of winning the other. Also, the probability of winning in any month is independent of the previous ones, so M has a geometric distribution with parameters:
+You decide to play monthly in two different lotteries, and you stop playing as soon as you win a prize in one (or both) lotteries of at least one million euros. Suppose that every time you participate in these lotteries, the probability to win one million (or more) euros is $p_1$ for one of the lotteries and $p_2$ for the other. Let $M$ be the number of times you participate in these lotteries until winning at least one prize. What kind of distribution does $M$ have, and what is its parameter?
 
-$$\\p = p_{1} \cdot p_{2} + p_{1} (1 - p_{2})+ p_{2} (1 - p_{1})$$ 
+#### Solution
+
+We have defined $M$ as the number of times you participate in these lotteries until winning at least one prize.
+We assume the probability of winning one contest is independent to the probability of winning the other and the probability of winning in any month is independent of the previous ones. 
+
+Given the conditions, $M$ has a **geometric** distribution (Number of trials until the first success).
+
+The parameter of the **geometric** distribution is the probability of success $p$.
+
+Lets define events. $W_1: ``\text{ Win at least 1.000.000 euros in lottery 1}"$ and $W_2: ``\text{ Win at least 1.000.000 euros in lottery 2}"$ and assign probabilities $p_1$ and $p_2$ such that: $\mathbb{P}\left(W_1\right) = p_1$ and $\mathbb{P}\left(W_2\right) = p_2$.
+
+The probability of failure is $\mathbb{P}\left(W_1^{c} \cap W_2^{c}\right) = \mathbb{P}\left(W_1^{c}\right) \cdot \mathbb{P}\left(W_2^{c}\right) = \left(1-p_1\right) \cdot \left(1-p_2\right)$
+
+The parameter (probability of success) $p$ can be expressed as:
+
+1. $p = 1 -\mathbb{P}\left( \text{failure}\right) = 1-\left(1-p_1\right) \cdot \left(1-p_2\right)$
+1. $p = \mathbb{P}\left( W_1 \cup W_2 \right) = \mathbb{P}\left(W_1\right) + \mathbb{P}\left(W_2\right) - \mathbb{P}\left(W_1 \cap W_2 \right) = p_1+p_2 - p_1 \cdot p_2$
+1. $p = \mathbb{P}\left(W_1 \cap W_2\right) + \mathbb{P}\left(W_1 \cap W_2^{c}\right) + \mathbb{P}\left(W_1^{c} \cap W_2\right) = p_{1} \cdot p_{2} + p_{1} (1 - p_{2})+ p_{2} (1 - p_{1})$
+
+Finally, its probability mass distribution using the first parameter is:
+
+$$p_{M}(m)= \left(\left(1-p_1\right) \cdot \left(1-p_2\right)\right)^{m-1}  \cdot \left(1-\left(1-p_1\right) \cdot \left(1-p_2\right) \right)  \text{for }k=1,\cdots$$ 
 
 ### Problem 4.14
 
 We throw a coin until a head turns up for the second time, where $p$ is the probability that a throw results in a head and we assume that the outcome of each throw is independent of the previous outcomes. Let $X$ be the number of times we have thrown the coin.
 
-#### Result 
+#### Solution 
 
 a. We can get $\mathbb{P}(X=2)$ only if we get one head in the first toss and another head in the second toss. Since the probability of getting a head is p, then: $\mathbb{P}(X=2) = p*p = p^2$
 In addition, to have 2 heads in 3 tosses, it is necessary to get a tail before the second head. We have two possibilities $\left \{ HTH,THH \right\}$. So, $\mathbb{P}(X=3) = p(1-p)p + (1-p)p^2 = 2(1-p)p^2$. Finally, to get 2 heads in 4 tosses, we need to have 2 tails before the second head:  $\left \{HTTH,TTHH,THTH \right\}$. Which gives us:$\mathbb{P}(X=4) = p(1-p)(1-p)p + (1-p)(1-p)p^2 + (1-p)p(1-p)p = 3(1-p)^2p^2$

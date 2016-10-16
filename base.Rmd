@@ -530,7 +530,52 @@ $$But, by definition $\mathbb{P}\left(B\right)<1$. Therefore, if $A$ and $B$ are
 
 ## 2. Topic: Discrete random variables – Chapter 4
 
-### 4.2
+### Problem 4.2
+Let $X$ be a discrete random variable with probability mass function $p$ given by:
+
+|$a$|-1|0|1|2|
+|:---:|:---:|:---:|:---:|:---:|
+|$p\left( a \right)$|$\frac{1}{4}$| $\frac{1}{8}$  |$\frac{1}{8}$   | $\frac{1}{2}$  | 
+
+and $p\left( a\right)=0$ for all other $a$. 
+
+a. Let the random variable $Y$ be deﬁned by $Y = X^2$, i.e., if $X =2$,then $Y = 4$. Calculate the probability mass function of $Y$.
+b. Calculate the value of the distribution functions of $X$ and $Y$ in $a=1$, $a=\frac{3}{4}$ and $a=\pi-1$.
+
+#### Solution
+
+a. As we define $Y = X^2$, we evaluate every element of the support of $X$ to obtain the image in $Y$.
+    * if $X = -1$ then $Y = 1$.
+    * if $X = 0$ then $Y = 0$.
+    * if $X = 1$ then $Y = 1$
+    * if $X = 2$ then $Y = 4$ 
+    
+    Therefore, we name the probability mass function of $Y$ as $p_Y(a), a=\{0,1,4\}$ 
+    
+    * $p_Y(0) = p(0) = \frac{1}{8}$
+    * $p_Y(1) = p(-1) + p(1) = \frac{1}{4}+\frac{1}{8}=\frac{3}{8}$
+    * $p_Y(4) = p(2) = \frac{1}{2}$
+    
+    |$a$|0|1|4|
+    |:---:|:---:|:---:|:---:|
+    |$p_Y\left( a \right)$|$\frac{1}{8}$| $\frac{3}{8}$ | $\frac{1}{2}$  | 
+    
+b. First, we calculate de distribution function of $X$ and $Y$. We named each as $F_X(a)$ and $F_Y(a)$ for $X$ and $Y$ respectively:
+
+    |$a$|-1|0|1|2|
+    |:---:|:---:|:---:|:---:|:---:|
+    |$F_X(a)=\mathbb{P}\left(X \leq a\right)$|$\frac{1}{4}$| $\frac{3}{8}$  |$\frac{1}{2}$   | $1$  | 
+    
+    |$a$|0|1|4|
+    |:---:|:---:|:---:|:---:|
+    |$F_Y(a)=\mathbb{P}\left(Y \leq a\right)$|$\frac{1}{8}$| $\frac{1}{2}$ | $1$  | 
+    
+    * $F_{X}\left ( X\leq 1 \right ) = \frac{1}{2}$
+    * $F_{Y}\left ( Y\leq 1 \right ) = \frac{1}{2}$
+    * $F_{X}\left ( X\leq \frac{3}{4} \right ) = \frac{3}{8}$
+    * $F_{Y}\left ( Y\leq \frac{3}{4} \right ) = \frac{1}{8}$
+    * $F_{X}\left ( X\leq \pi - 3 \right ) = F_{X}\left ( X\leq 0.1415 \right ) =  \frac{3}{8}$
+    * $F_{Y}\left ( Y\leq \pi - 3 \right ) = F_{X}\left ( Y\leq 0.1415 \right ) =  \frac{1}{8}$
 
 ### Problem 4.11
 
@@ -555,9 +600,9 @@ The parameter (probability of success) $p$ can be expressed as:
 1. $p = \mathbb{P}\left( W_1 \cup W_2 \right) = \mathbb{P}\left(W_1\right) + \mathbb{P}\left(W_2\right) - \mathbb{P}\left(W_1 \cap W_2 \right) = p_1+p_2 - p_1 \cdot p_2$
 1. $p = \mathbb{P}\left(W_1 \cap W_2\right) + \mathbb{P}\left(W_1 \cap W_2^{c}\right) + \mathbb{P}\left(W_1^{c} \cap W_2\right) = p_{1} \cdot p_{2} + p_{1} (1 - p_{2})+ p_{2} (1 - p_{1})$
 
-Finally, its probability mass distribution using the first parameter is:
+Finally, as an example the probability mass distribution associated to $M$ ~Geom($1-\left(1-p_1\right) \cdot \left(1-p_2\right)$) using the first parameter is:
 
-$$p_{M}(m)= \left(\left(1-p_1\right) \cdot \left(1-p_2\right)\right)^{m-1}  \cdot \left(1-\left(1-p_1\right) \cdot \left(1-p_2\right) \right)  \text{for }k=1,\cdots$$ 
+$$p_{M}(m)= \left(\left(1-p_1\right) \cdot \left(1-p_2\right)\right)^{m-1}  \cdot \left(1-\left(1-p_1\right) \cdot \left(1-p_2\right) \right)  \text{for mk=1,\cdots$$ 
 
 ### Problem 4.14
 

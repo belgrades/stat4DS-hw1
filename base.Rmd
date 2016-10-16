@@ -602,7 +602,7 @@ The parameter (probability of success) $p$ can be expressed as:
 
 Finally, as an example the probability mass distribution associated to $M$ ~Geom($1-\left(1-p_1\right) \cdot \left(1-p_2\right)$) using the first parameter is:
 
-$$p_{M}(m)= \left(\left(1-p_1\right) \cdot \left(1-p_2\right)\right)^{m-1}  \cdot \left(1-\left(1-p_1\right) \cdot \left(1-p_2\right) \right)  \text{for mk=1,\cdots$$ 
+$$p_{M}(m)= \left(\left(1-p_1\right) \cdot \left(1-p_2\right)\right)^{m-1}  \cdot \left(1-\left(1-p_1\right) \cdot \left(1-p_2\right) \right)  \text{for } m=1,2, \cdots$$ 
 
 ### Problem 4.14
 
@@ -665,7 +665,7 @@ At first sight, it seems that the answer should be **the same** because, assumin
 
 We can view the problem of finding the patterns as the [Substring Search](http://algs4.cs.princeton.edu/lectures/53SubstringSearch.pdf) problem. There exist several implementations to solve these problem. One of them, consists in obtaining a Deterministic finite state automaton (DFA) which accepts the string if the sequence of transitions reading every character leads to halt state (or final state). We now show both automaton in our context: 
 
-![Automaton for HTT string](HTT.png)
+![Automaton for HTT string](images/HTT.png)
 
 This is the automaton for string $\text{[HTT]}$. Assuming the alphabet $\left \{\text{H,T} \right \}$. Every state transitions to other state if we read $\text{H}$ or $\text{T}$. 
 
@@ -674,7 +674,7 @@ This is the automaton for string $\text{[HTT]}$. Assuming the alphabet $\left \{
 1. In $q_2$ we assume that the last two characters we have read are $\text{HT}$
 1. Finally, in $q_f$ we assume that we have read our 3 consecutive characters $\text{HTT}$ which means we arrived to our halt state.
 
-![Automaton for HTH string](HTH.png)
+![Automaton for HTH string](images/HTH.png)
 
 This is the automaton for string $\text{[HTH]}$. Assuming the alphabet $\left \{\text{H,T} \right \}$. Every state transitions to other state if we read $\text{H}$ or $\text{T}$. 
 
@@ -685,7 +685,9 @@ This is the automaton for string $\text{[HTH]}$. Assuming the alphabet $\left \{
 
 It is important to notice that the difference between both automatons is on state $q_2$. In the case of $\text{[HTT]}$, if we failed to get the second consecutive $\text{T}$ we return to state $q_1$. Conversely, if we failed to obtain the $\text{H}$ we return to state $q_0$.
 
-**First conclussion**: Analyzing these automatons, it is possible to conclude that the average number of tosses for string $\text{[HTH]}$ is larger than for string $\text{[HTT]}$ because when both fail in state $q_2$, $\text{[HTH]}$ returns to the initial state $q_0$ and $\text{[HTT]}$ only goes back to $q_1$.
+**First conclussion**: 
+
+Analyzing these automatons, it is possible to conclude that the average number of tosses for string $\text{[HTH]}$ is larger than for string $\text{[HTT]}$ because when both fail in state $q_2$, $\text{[HTH]}$ returns to the initial state $q_0$ and $\text{[HTT]}$ only goes back to $q_1$.
 
 #### "Simulating" our automatons:
 
@@ -763,14 +765,16 @@ One run of both algorithms may show an output like
 1. ('HTT: ', 8.0010999999999992, 24.029398789999998)
 1. ('HTH: ', 10.01468, 58.009584497599995)
 
-**Second conclussion**: If we run our codes multiple times we concluded that the average number of tosses until we get the string $\text{[HTT]}$ is $\approx 8$ and the variance is $\approx 24$. However, for string $\text{[HTH]}$ the average number of tosses is $\approx 10$ and the variance is $\approx 58$. We then have a strong empirical evidence that the average number of tosses until string $\text{[HTH]}$ is larger than until $\text{[HTT]}$. 
+**Second conclussion**: 
+
+If we run our codes multiple times we concluded that the average number of tosses until we get the string $\text{[HTT]}$ is $\approx 8$ and the variance is $\approx 24$. However, for string $\text{[HTH]}$ the average number of tosses is $\approx 10$ and the variance is $\approx 58$. We then have a strong empirical evidence that the average number of tosses until string $\text{[HTH]}$ is larger than until $\text{[HTT]}$. 
 
 #### A markov chain approach.
 We may analyze our automaton as a Markov process in which the probability of transition between every state is the probability of obtaining characters $\text{H}$ or $\text{T}$. The transition matrices for both automatons are:
 
-![Automaton for HTH string](trans_hth.PNG)
+![Automaton for HTH string](images/trans_hth.PNG)
 
-![Automaton for HTH string](trans_htt.PNG)
+![Automaton for HTH string](images/trans_htt.PNG)
 
 In both cases, we have an absorbent state $q_f$ in which the probability of staying in the state is 1 when we arrive to this state and transient states $\left \{q_0, q_1, q_2 \right \}$. Read [Classification of states](https://www.math.ucdavis.edu/~gravner/MAT135B/materials/ch13.pdf) for further information about classification of states.
 
@@ -782,10 +786,13 @@ This said, we investigated and this type of matrices are called Absorbent Markov
 
 Now, lets see the calculations for the string  $\text{[HTT]}$:
 
+![](images/complete_htt.PNG)
 
+As we can see, the average number of tosses for string $\text{[HTT]}$ when we start in state $q_0$ is 8. Also, the variance is 24. If we do similar calculations for the markov chain related to string $\text{[HTH]}$, we get that the average number of tosses is 10 and the variance is 58.
 
+**Third and final conclussion**:
 
-
+We got similar numbers between our simulation and the actual theoretical number using Absorbent Markov Chains. This said, we arrived to the same conclussion in 3 different ways which is, surprisingly, that **the average number of tosses until $\text{[HTH]}$ is larger than until $\text{[HTT]}$ (It's actually 10 vs 8).
  
 # **Part V:** A naive version of the Naive Bayes Classifier
 The exercise gives us a table of the historical events of four weather parameters (outlook, temperature, humidity, wind) and, based in these weather conditions, we played tennis or not. Then, knowing the weather condition for today, it asks us if we will play tennis. In other words, based in our past experience with the given condition, i.e. Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong, what is most propable evidence expected?

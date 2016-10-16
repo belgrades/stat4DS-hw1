@@ -679,7 +679,7 @@ At first sight, it seems that the answer should be **the same** because, assumin
 
 We can view the problem of finding the patterns as the [Substring Search](http://algs4.cs.princeton.edu/lectures/53SubstringSearch.pdf) problem. There exist several implementations to solve these problem. One of them, consists in obtaining a Deterministic finite state automaton (DFA) which accepts the string if the sequence of transitions reading every character leads to halt state (or final state). We now show both automaton in our context: 
 
-![Automaton for HTT string](images/HTT.png)
+![Automaton for HTT string](images/HTT.PNG)
 
 This is the automaton for string $\text{[HTT]}$. Assuming the alphabet $\left \{\text{H,T} \right \}$. Every state transitions to other state if we read $\text{H}$ or $\text{T}$. 
 
@@ -688,7 +688,7 @@ This is the automaton for string $\text{[HTT]}$. Assuming the alphabet $\left \{
 1. In $q_2$ we assume that the last two characters we have read are $\text{HT}$
 1. Finally, in $q_f$ we assume that we have read our 3 consecutive characters $\text{HTT}$ which means we arrived to our halt state.
 
-![Automaton for HTH string](images/HTH.png)
+![Automaton for HTH string](images/HTH.PNG)
 
 This is the automaton for string $\text{[HTH]}$. Assuming the alphabet $\left \{\text{H,T} \right \}$. Every state transitions to other state if we read $\text{H}$ or $\text{T}$. 
 

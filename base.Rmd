@@ -532,33 +532,23 @@ $$But, by definition $\mathbb{P}\left(B\right)<1$. Therefore, if $A$ and $B$ are
 
 ### 4.2
 
-### 4.11
+### PRoblem 4.11
 
 The probability of winning one contest is independent to the probability of winning the other. Also, the probability of winning in any month is independent of the previous ones, so M has a geometric distribution with parameters:
 
 $$\\p = p_{1} \cdot p_{2} + p_{1} (1 - p_{2})+ p_{2} (1 - p_{1})$$ 
 
-### 4.14
-#### a) 
-We can get P(X=2) only if we get one head in the first toss and another head in the second toss. Since the probability of getting a head is p, then:
-$$
-P(X=2) = p*p = p^2
-$$
-In addition, to have 2 heads in 3 tossing, it is necessary to get a tail before the second head. We have to possibilities (HTH,THH). So,
-$$
-P(X=3) = p(1-p)p + (1-p)p^2 = 2(1-p)p^2
-$$
-In the same way, to get 2 heads in 4 tossing, we need  to have 2 tails before the second head: (HTTH,TTHH,THTH). Which gives us:
-$$
-P(X=4) = p(1-p)(1-p)p + (1-p)(1-p)p^2 + (1-p)p(1-p)p = 3(1-p)^2p^2
-$$
+### Problem 4.14
 
-#### b) 
-It is easy to think that in order to get two heads, by any path of the tree of possibilities, we will have a $p^2$ associated in the equation of P(X=n). Furthermore, we will have always (1-n) possible paths to have X=n. Lastly, to have 2 heads in n, firstly we nead to have (n-2) tails before the second head. Of course, getting two heads can only occurs if $n\geq2$. According to this, we have:
+We throw a coin until a head turns up for the second time, where $p$ is the probability that a throw results in a head and we assume that the outcome of each throw is independent of the previous outcomes. Let $X$ be the number of times we have thrown the coin.
 
-$$
-P(X=n)=(n-1) p^2 (1-p)^{n-2}, n\geq2
-$$
+#### Result 
+
+a. We can get $\mathbb{P}(X=2)$ only if we get one head in the first toss and another head in the second toss. Since the probability of getting a head is p, then: $\mathbb{P}(X=2) = p*p = p^2$
+In addition, to have 2 heads in 3 tosses, it is necessary to get a tail before the second head. We have two possibilities $\left \{ HTH,THH \right\}$. So, $\mathbb{P}(X=3) = p(1-p)p + (1-p)p^2 = 2(1-p)p^2$. Finally, to get 2 heads in 4 tosses, we need to have 2 tails before the second head:  $\left \{HTTH,TTHH,THTH \right\}$. Which gives us:$\mathbb{P}(X=4) = p(1-p)(1-p)p + (1-p)(1-p)p^2 + (1-p)p(1-p)p = 3(1-p)^2p^2$
+
+b. 
+We know that we throw the coin until the second head appears. Given $n$ the number of throws, we will always have $2$ heads and $n-2$ tails. The probability of each event that has 2 heads and $n-2$ tails is given by $p^2 \cdot (1-p)^{n-2}$ assuming independence in each throw. Lastly, we need to count how many of these events exist. To do this, is important to notice that we end our experiment when we get our second head, as a result, the last throw will **always** be a head. Therefore, we need to count the ways 1 head and $n-2$ tails can be obtained in the first $n-1$ throws. This problem is equivalent to assign a position to the head given the $n-1$ spots available. This said, we need the number of subsets of size 1 from a set of size $n-1$ which is ${n-1 \choose 1}=n-1$. Finally, we have that $P(X=n)=(n-1) p^2 (1-p)^{n-2}$ with $n\geq2$.
 
 # Part IV: Coins, Randomness and Genetics
 ##Summary of the video:

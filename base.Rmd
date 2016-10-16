@@ -663,6 +663,108 @@ At first sight, it seems that the answer should be **the same** because, assumin
 
 #### A computational approach
 
+We can view the problem of finding the patterns as the [Substring Search](http://algs4.cs.princeton.edu/lectures/53SubstringSearch.pdf) problem. There exist several implementations to solve these problem. One of them, consists in obtaining a Deterministic finite state automaton (DFA) which accepts the string if the sequence of transitions reading every character leads to halt state (or final state). We now show both automaton in our context: 
+
+![Automaton for HTT string](HTT.png)
+
+This is the automaton for string $\text{[HTT]}$. Assuming the alphabet $\left \{\text{H,T} \right \}$. Every state transitions to other state if we read $\text{H}$ or $\text{T}$. 
+
+1. In the initial state, $q_0$ we assume the empty string. 
+1. In $q_1$ we assume that the last character we have read is $\text{H}$
+1. In $q_2$ we assume that the last two characters we have read are $\text{HT}$
+1. Finally, in $q_f$ we assume that we have read our 3 consecutive characters $\text{HTT}$ which means we arrived to our halt state.
+
+![Automaton for HTH string](HTH.png)
+
+This is the automaton for string $\text{[HTH]}$. Assuming the alphabet $\left \{\text{H,T} \right \}$. Every state transitions to other state if we read $\text{H}$ or $\text{T}$. 
+
+1. In the initial state, $q_0$ we assume the empty string. 
+1. In $q_1$ we assume that the last character we have read is $\text{H}$
+1. In $q_2$ we assume that the last two characters we have read are $\text{HT}$
+1. Finally, in $q_f$ we assume that we have read our 3 consecutive characters $\text{HTT}$ which means we arrived to our halt state.
+
+It is important to notice that the difference between both automatons is on state $q_2$. In the case of $\text{[HTT]}$, if we failed to get the second consecutive $\text{T}$ we return to state $q_1$. Conversely, if we failed to obtain the $\text{H}$ we return to state $q_0$.
+
+**First conclussion**: Analyzing these automatons, it is possible to conclude that the average number of tosses for string $\text{[HTH]}$ is larger than for string $\text{[HTT]}$ because when both fail in state $q_2$, $\text{[HTH]}$ returns to the initial state $q_0$ and $\text{[HTT]}$ only goes back to $q_1$.
+
+#### "Simulating" our automatons:
+
+Our first conclussion is only an naive guess. To support it with empirical evidence, we decided to program both automatons and analyze the average number of tosses until we get the desired string. They're programmed in Python and should run in Rmarkdown but we've decided to put the parameter ```eval=FALSE```.
+
+Normally, this approach is called Monte Carlo Simulation. Basically, we're repeating the same experiment $N$ ($N$ is 20000 in the code) times. We store the number of tosses until we get our pattern in an array and then we retrieve the average number and the variance of tosses. 
+
+```{r engine='python', eval=FALSE}
+from random import random
+from numpy import mean, std, var, float64
+
+# Automata for 'HTT'
+# This should be an algorithm that creates the automata given string
+automata = dict()
+automata[('q0','-')] = 'q0'
+automata[('q0','H')] = 'q1'
+automata[('q0','T')] = 'q0'
+automata[('q1','H')] = 'q1'
+automata[('q1','T')] = 'q2'
+automata[('q2','H')] = 'q1'
+automata[('q2','T')] = 'qf'
+
+# Experiment #1
+experiments = 20000
+HTT = []
+
+for exp in range(experiments):
+    state = ('q0','-')
+    steps = 0
+    while automata[state] != 'qf':
+        steps += 1
+        coin = 'H' if random() < 0.5 else 'T'       
+        state = (automata[state], coin)
+    HTT.append(steps)
+
+# Shame on Donald Knuth
+print("HTT: ",mean(HTT), var(HTT))
+```
+
+
+```{r engine='python' eval=FALSE}
+from random import random
+from numpy import mean, std, var, float64
+# Automata for 'HTH'
+# This should be an algorithm that creates the automata given string
+
+automata = dict()
+automata[('q0','-')] = 'q0'
+automata[('q0','H')] = 'q1'
+automata[('q0','T')] = 'q0'
+automata[('q1','H')] = 'q1'
+automata[('q1','T')] = 'q2'
+automata[('q2','H')] = 'qf'
+automata[('q2','T')] = 'q0'
+
+# Experiment #1
+experiments = 200000
+HTH = []
+
+for exp in range(experiments):
+    state = ('q0','-')
+    steps = 0
+    while automata[state] != 'qf':
+        steps += 1
+        coin = 'H' if random() < 0.5 else 'T'       
+        state = (automata[state], coin)
+    HTH.append(steps)
+    
+print('HTH: ',mean(HTH, dtype=float64), var(HTH, dtype=float64))
+```
+
+One run of both algorithms may show an output like 
+
+1. ('HTT: ', 8.0010999999999992, 24.029398789999998)
+1. ('HTH: ', 10.01468, 58.009584497599995)
+
+**Second conclussion**: If we run our codes multiple times we concluded that the average number of tosses until we get the string $\text{[HTT]}$ is $\approx 8$ and the variance is $\approx 24$. However, for string $\text{[HTH]}$ the average number of tosses is $\approx 10$ and the variance is $\approx 58$. We then have strong empirical evidence that the average number of tosses until string $\text{[HTH]}$ is larger than until $\text{[HTT]}$. 
+
+
 # **Part V:** A naive version of the Naive Bayes Classifier
 The exercise gives us a table of the historical events of four weather parameters (outlook, temperature, humidity, wind) and, based in these weather conditions, we played tennis or not. Then, knowing the weather condition for today, it asks us if we will play tennis. In other words, based in our past experience with the given condition, i.e. Outlook = Sunny, Temperature = Cool, Humidity = High , Wind = Strong, what is most propable evidence expected?
 

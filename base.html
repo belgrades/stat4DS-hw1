@@ -185,6 +185,244 @@ list4[2] + list4[4]</code></pre>
 <pre><code>## [1] 1 1 1 2 2 2 3 3 3</code></pre>
 </div>
 </div>
+<div id="part-ii-massage-your-data." class="section level2">
+<h2><em>Part II:</em> “Massage” your data.</h2>
+<div id="a.-reading-with-read.delim" class="section level3">
+<h3>a. Reading with <code>read.delim</code></h3>
+<p>We used the following 4 parameters.</p>
+<ol style="list-style-type: decimal">
+<li>**<a href="file:**" class="uri">file:**</a> The name of the file you want to read.</li>
+<li><strong>header:</strong> Binary parameter. If TRUE then the first <em>row</em> of the file is the header. Conversely, if it’s FALSE then the first row of the file isn’t a header.</li>
+<li><strong>sep:</strong> The character separator in our file. In our case, the character tab (“”).</li>
+<li><strong>stringsAsFactors:</strong> Binary parameter. If TRUE then every string column will be transformed into data type factor, otherwise it’ll remain as character.</li>
+</ol>
+<pre class="r"><code>youraw = read.delim(file = &quot;you.tsv&quot;,
+                    header = TRUE,
+                    sep = &quot;\t&quot;,
+                    stringsAsFactors = FALSE)
+
+str(object = youraw)</code></pre>
+<pre><code>## 'data.frame':    68 obs. of  6 variables:
+##  $ Where.are.you.from.                                             : chr  &quot;Spain&quot; &quot;Italy&quot; &quot;Italy&quot; &quot;Italy&quot; ...
+##  $ Previous..academic..life.                                       : chr  &quot;Physics&quot; &quot;Statistics&quot; &quot;Statistics&quot; &quot;Statistics&quot; ...
+##  $ How.well.do.you.know..Probability                               : int  3 4 4 2 2 4 2 2 3 3 ...
+##  $ How.well.do.you.know..Statistics                                : int  3 4 4 2 2 2 4 4 3 2 ...
+##  $ How.well.do.you.know..R                                         : int  1 4 3 3 2 0 3 0 4 4 ...
+##  $ Besides.R..do.you.fluently.know.use.other.programming.languages.: chr  &quot;Yes, C++, Matlab, Bash&quot; &quot;Yes, Java, SQL&quot; &quot;Not fluently&quot; &quot;no&quot; ...</code></pre>
+</div>
+<div id="b.-how-many-rows-and-columns-does-youraw-have" class="section level3">
+<h3>b. How many rows and columns does <em>youraw</em> have?</h3>
+<p>It has 68 rows and 6 columns.</p>
+<pre class="r"><code># Number of rows
+nrow(youraw)</code></pre>
+<pre><code>## [1] 68</code></pre>
+<pre class="r"><code># Number of columns.
+ncol(youraw)</code></pre>
+<pre><code>## [1] 6</code></pre>
+</div>
+<div id="c.-what-are-the-names-of-the-columns-of-youraw" class="section level3">
+<h3>c. What are the names of the columns of youraw?</h3>
+<p>The names are:</p>
+<ol style="list-style-type: decimal">
+<li>“Where.are.you.from”</li>
+<li>“Previous..academic..life”</li>
+<li>“How.well.do.you.know..Probability”</li>
+<li>“How.well.do.you.know..Statistics”</li>
+<li>“How.well.do.you.know..R”<br />
+</li>
+<li>“Besides.R..do.you.fluently.know.use.other.programming.languages.”</li>
+</ol>
+<pre class="r"><code>names(youraw)</code></pre>
+<pre><code>## [1] &quot;Where.are.you.from.&quot;                                             
+## [2] &quot;Previous..academic..life.&quot;                                       
+## [3] &quot;How.well.do.you.know..Probability&quot;                               
+## [4] &quot;How.well.do.you.know..Statistics&quot;                                
+## [5] &quot;How.well.do.you.know..R&quot;                                         
+## [6] &quot;Besides.R..do.you.fluently.know.use.other.programming.languages.&quot;</code></pre>
+</div>
+<div id="d.-what-is-the-value-of-row-7-column-5-of-youraw" class="section level3">
+<h3>d. What is the value of row 7, column 5 of youraw?</h3>
+<p>The value is 3.</p>
+<pre class="r"><code>youraw[7, 5]</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="e.-display-the-second-row-of-youraw-in-its-entirety." class="section level3">
+<h3>e. Display the second row of youraw in its entirety.</h3>
+<pre class="r"><code>youraw[2, ]</code></pre>
+<pre><code>##   Where.are.you.from. Previous..academic..life.
+## 2               Italy                Statistics
+##   How.well.do.you.know..Probability How.well.do.you.know..Statistics
+## 2                                 4                                4
+##   How.well.do.you.know..R
+## 2                       4
+##   Besides.R..do.you.fluently.know.use.other.programming.languages.
+## 2                                                   Yes, Java, SQL</code></pre>
+</div>
+<div id="f.-now-explain-what-this-command-does" class="section level3">
+<h3>f. Now explain what this command does:</h3>
+<pre class="r"><code>youclean &lt;- youraw
+names(youclean)</code></pre>
+<pre><code>## [1] &quot;Where.are.you.from.&quot;                                             
+## [2] &quot;Previous..academic..life.&quot;                                       
+## [3] &quot;How.well.do.you.know..Probability&quot;                               
+## [4] &quot;How.well.do.you.know..Statistics&quot;                                
+## [5] &quot;How.well.do.you.know..R&quot;                                         
+## [6] &quot;Besides.R..do.you.fluently.know.use.other.programming.languages.&quot;</code></pre>
+<p>We make a copy of the list and called it <code>youclean</code>. Then, we run the command <code>names(youclean)</code> which changes the name of the columns given the entry array.</p>
+<pre class="r"><code>names(youclean) &lt;- c(&quot;where&quot;, &quot;prev.life&quot;, &quot;good.prob&quot;, &quot;good.stat&quot;, &quot;good.R&quot;, &quot;other.lan&quot;)
+names(youclean)</code></pre>
+<pre><code>## [1] &quot;where&quot;     &quot;prev.life&quot; &quot;good.prob&quot; &quot;good.stat&quot; &quot;good.R&quot;    &quot;other.lan&quot;</code></pre>
+</div>
+<div id="g.-creation-of-two-new-variables-lan1-and-lan2" class="section level3">
+<h3>g. Creation of two new variables <code>lan1</code> and <code>lan2</code></h3>
+<p><strong>The Task:</strong></p>
+<p>The goal is to create two new variables inside the dataset youclean – named <code>lan1</code> and <code>lan2</code> – which contains the first two options listed in other.lan. In case less than two options are provided, fill in the new variables with NA as needed.</p>
+<p><strong>Solution:</strong></p>
+<p>Our approach consist in creating a <code>base</code> array of programming languages and use string manipulation functions to find matches of all elements in the <code>base</code> array. Then, we sort the matches and pick the first 2 elements. Finally, if there are less than 2 matches we fill the NA’s as needed.</p>
+<p>We decided this instead of different approaches for several reasons:</p>
+<ol style="list-style-type: decimal">
+<li><p>The task is to find <strong>programming languages</strong>. As a result, the are 7 cases where the <em>technology</em> described <strong>are not</strong> programming languages. These are:</p>
+<ul>
+<li><strong><a href="http://turbopascal.org/">Turbo pascal</a>:</strong> Is an IDE which has a compiler for the programming language pascal. Therefore, we added pascal as a possible language in <code>base</code>.</li>
+<li><strong><a href="http://www.mysql.com/">MySQL</a>:</strong> Is a relational database management system (RDBMS) which uses SQL that is known to be turing complete, therefore we added sql as the programming language.</li>
+<li><strong><a href="https://www.android.com/">Android</a>:</strong> Is a Mobile Operating System in which you need several languages to develop applications. Therefore, we did not add a programming language with android.</li>
+<li><strong><a href="https://www.microsoft.com/it-it/">Windows</a>:</strong> Is an Operating System that can be related to multiple programming languages. In this case, we did not add a programming language</li>
+<li><strong><a href="http://www.ni.com/labview/i/">LabView</a>:</strong> Is a System Design Software designed for a graphical programming language called (G). As a result we added G as a possible programming language.</li>
+<li><strong>CSS</strong> and <strong>XML</strong>: CSS is a style sheet language used for describing the presentation of a document written in a markup language <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">Wikipedia/CSS</a> and XML is a markup language that defines a set of rules for encoding documents in a format that is both human-readable and machine-readable <a href="https://en.wikipedia.org/wiki/XML">Wikipedia/XML</a>. By their own, CSS and XML are not programming languages they can be consideredas such if they work together with HTML (<a href="http://eli.fox-epste.in/rule110/">Example of interaction between HTML and CSS</a>). We decided, however, not to include them in our programming languages array <code>base</code>.</li>
+</ul></li>
+<li><p>There is not a clear structure of the answers given by the students. We can find indeed several patterns such as:</p>
+<ul>
+<li>They usually responded Yes or No at the beginning of the sentence.</li>
+<li>They usually separated the languages with commas.</li>
+<li>Sometimes, they added text before or after the programming languages.</li>
+<li>Everyone wrote <code>C++</code> which may have problems with regular expressions. Therefore, we changed to <code>cpp</code>.</li>
+</ul></li>
+<li><p>In the future, we think that if the number of students increases the chance of getting an unusual pattern is high. Therefore, with our <code>base</code> array we just need to add a new programming language to the array if we have not seen it before.</p>
+<ul>
+<li><strong>Note:</strong> The proper solution should be finding a file with <em>all</em> the programming languages and load it everytime we run our algorithm. We found this <a href="https://en.wikipedia.org/wiki/List_of_programming_languages">List of Programming Languages</a>. We could have made the list but instead we decided just to put the languages used in our scope.</li>
+</ul></li>
+<li><p>Finally, even though our solution may be in theory slower than another approaches. We expect student’s answers to be short.</p></li>
+</ol>
+<pre class="r"><code># Array of languages
+languages = c(&quot;cpp&quot;, &quot;matlab&quot;, &quot;bash&quot;,&quot;js&quot;, &quot;javascript&quot;,&quot;java&quot;, &quot;sql&quot;, &quot;c&quot;, &quot;sas&quot;, &quot;python&quot;, &quot;objective-c&quot;,  &quot;pascal&quot;, &quot;ruby&quot;, &quot;html&quot;, &quot;php&quot;, &quot;shell&quot;, &quot;assembly&quot;, &quot;c#&quot;, &quot;pl-sql&quot;)
+
+# New columns to youclean
+lan1arr = character()
+lan2arr = character()
+
+# Preprocessing: Transforming languages to proper syntax.
+answers = tolower(youclean$other.lan)
+answers = gsub(&quot;pl/sql&quot;, &quot;pl-sql&quot;, answers)
+answers = gsub(&quot;objective c&quot;, &quot;objective-c&quot;, answers)
+answers = gsub(&quot;c\\+\\+&quot;, &quot;cpp&quot;, answers)
+answers = gsub(&quot;mysql&quot;, &quot;sql&quot;, answers)
+
+# Substitution of special characters to whitespace
+answers = gsub(&quot;\\,&quot;, &quot; &quot;, answers)
+answers = gsub(&quot;\\.&quot;,&quot; &quot;, answers)
+answers = gsub(&quot;/&quot;,&quot; &quot;, answers)
+answers = gsub(&quot;!&quot;,&quot; &quot;, answers)
+
+for(answer in answers){
+  # Assuming minimum positions 99999
+  min_1 = 99999
+  min_2 = 99999
+  
+  # Default languages as NA
+  lan1 = NA
+  lan2 = NA
+  
+  # Split every answer in whitepaces
+  for(chunk in strsplit(answer, &quot; &quot;)[[1]]){
+    
+    # Trim eliminates whitespaces on the left and right of string.
+    chunk = trimws(chunk)
+    
+    # For every language, we search if exists in every chunk
+    for(language in languages){
+       
+      # Returns the position of the occurrence of the language in the chunk, -1 otherwise 
+      position = regexpr(language, chunk, fixed=TRUE)
+      
+      # If the language exists in the chunk and has the same length as the chunk
+       if(position[1]&gt;-1 &amp;&amp; nchar(chunk) == nchar(language)){
+         
+        # In case the position is lower than our minimum, update min_1 and min_2
+        if(position[1] &lt; min_1){
+          min_2 = min_1
+          lan2 = lan1
+          
+          min_1 = position[1]
+          lan1 = language 
+          
+          # If we find 1 language it's impossible to find another in the chunk.
+          break
+        }else if(position[1] &lt; min_2){
+          min_2 = position[1]
+          lan2 = language
+          
+          # BIS
+          break
+        }
+      }
+    }  
+  }
+  
+  # Update arrays.
+  lan1arr = c(lan1arr, lan1)
+  lan2arr = c(lan2arr, lan2)
+}
+
+# Create new columns
+youclean$lan1 = lan1arr
+youclean$lan2 = lan2arr</code></pre>
+</div>
+<div id="h.-very-not-last-step-data-types." class="section level3">
+<h3>h. Very (not) last step: Data Types.</h3>
+<ol style="list-style-type: decimal">
+<li><p>Run the following code on your data and explain what it does:</p>
+<ul>
+<li><strong>class:</strong> Used to define or identify what “type” an object is from the point of view of object-oriented programming in R.</li>
+<li><strong>typeof:</strong> Determines the (R internal) type or storage mode of any object.</li>
+<li><strong>mode:</strong> Get or set the type or storage mode of an object.</li>
+</ul>
+<p>According to the <a href="http://stat.ethz.ch/R-manual/R-devel/doc/manual/R-lang.html#Objects">Manual of R</a> the main difference between <strong>typeof</strong> and <strong>mode</strong> is that <em>mode gives information about the mode of an object in the sense of Becker, Chambers &amp; Wilks (1988), and is more compatible with other implementations of the S language</em>. Conversely, <strong>typeof</strong> gives the type of the object from R internal point of view.</p></li>
+<li><p>Explain the difference you see between the first three and the last three lines of code.</p>
+<p>In the first three lines, the type, class and mode of the column <strong>where</strong> were the same (character). This means that every entry of every row of the column <strong>where</strong> is stored as plain text. In contrast, when we transformed the column with function <code>as.factor</code> we changed the R class to <strong>factor</strong>, the R internal type of storage to <strong>integer</strong> and the type of the object in the sense of S to <strong>numeric</strong>.</p>
+<p>This said, the <code>as.factor</code> function transform the object to a list of interger where every integer is mapped to a list of trings containing the original data.</p></li>
+</ol>
+<pre class="r"><code># Before
+class(youclean$where)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>typeof(youclean$where)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>mode(youclean$where)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code># Change to factor
+youclean$where &lt;- as.factor(youclean$where)
+levels(youclean$where)</code></pre>
+<pre><code>##  [1] &quot;Argentina&quot;  &quot;Azerbaijan&quot; &quot;Belgium&quot;    &quot;Brazil&quot;     &quot;China&quot;     
+##  [6] &quot;Egypt&quot;      &quot;Georgia&quot;    &quot;Germany&quot;    &quot;Iran&quot;       &quot;Italy&quot;     
+## [11] &quot;Italy &quot;     &quot;Montenegro&quot; &quot;Pakistan&quot;   &quot;Russia&quot;     &quot;Spain&quot;     
+## [16] &quot;Togo&quot;       &quot;Turkey&quot;     &quot;Turkey &quot;    &quot;Venezuela&quot;</code></pre>
+<pre class="r"><code>nlevels(youclean$where)</code></pre>
+<pre><code>## [1] 19</code></pre>
+<pre class="r"><code># After
+class(youclean$where)</code></pre>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<pre class="r"><code>typeof(youclean$where)</code></pre>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>mode(youclean$where)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p>Recycle the relevant part of this code to turn into factors also prev.life</p>
+<pre class="r"><code>youclean$prev.life &lt;- as.factor(youclean$prev.life)</code></pre>
+</div>
+<div id="i-saving-file" class="section level3">
+<h3>i: Saving file</h3>
+<p>Using <code>save</code> command to save our data youclean and youraw.</p>
+<pre class="r"><code>save(youclean, youraw, file=&quot;you.RData&quot;)</code></pre>
+</div>
+</div>
 <div id="part-iii-exercises-from-the-blue-book" class="section level1">
 <h1>Part III: Exercises from the blue book</h1>
 <div id="topic-discrete-random-variables-chapter-4" class="section level2">
@@ -216,12 +454,12 @@ P(X=n)=(n-1) p^2 (1-p)^{n-2}, n\geq2
 <div id="summary-of-the-video" class="section level2">
 <h2>Summary of the video:</h2>
 <p>The video starts talking about how many times do we need to shuffle the deck of cards to make it random, which means, the cards before the shuffle are totally different just after. As we know, the smaller the deck, the easier is tho get it shuffled randomly, because if the deck is 4 cards, them the number of possibilities is 4! = 4x3x2 = 24.</p>
-<p>But usually we cannot try out all the possibilities. In a complete deck of 52 cards, it means that we have 52! possibilities of sequences of cards, which results in more than 8x10^67 possibilities.</p>
-<p>Also, the mentioned that if you give an ordered deck of cards to a friend and tell him to shuffle by the common way of shuffling (without seeing while he does), which divides the deck in two parts of almost the same size, and shuffle them and put them together again, you will still have 2^(number of shuffles) rising ‘small’ sequences in the middle of the deck. If your friend mix 3 times, so there’s 8 rising sequences in the deck. And then you do a magic: remove cards one by one. If a card is not in order with the previous card, you start another pile. If it’s in order, you put in the same pile. In the 9th pile is the card that the person has taken.</p>
+<p>But usually we cannot try out all the possibilities. In a complete deck of 52 cards, it means that we have 52! possibilities of sequences of cards, which results in more than <span class="math inline">\(8x10^{67}\)</span> possibilities.</p>
+<p>Also, the mentioned that if you give an ordered deck of cards to a friend and tell him to shuffle by the common way of shuffling (without seeing while he does), which divides the deck in two parts of almost the same size, and shuffle them and put them together again, you will still have <span class="math inline">\(2^{number\_of\_shuffles}\)</span> rising ‘small’ sequences in the middle of the deck. If your friend mix 3 times, so there’s 8 rising sequences in the deck. And then you do a magic: remove cards one by one. If a card is not in order with the previous card, you start another pile. If it’s in order, you put in the same pile. In the 9th pile is the card that the person has taken.</p>
 <p>He affirmed again, practically, the deck is never completely mixed, it is not random. He raised a question: how much do we accept it to be shuffled? It will not be random, but how much do we consider it enough?</p>
-<p>When he cites the on-line poker, he compares that to have a deck really shuffled randomly, you would need to have computer with the capacity to process numbers in the order of 6x10^67, which is far from the possibilities of a computer of 32 bits (2^32 = 4,3 billions possibilities).</p>
+<p>When he cites the on-line poker, he compares that to have a deck really shuffled randomly, you would need to have computer with the capacity to process numbers in the order of <span class="math inline">\(6x10^{67}\)</span>, which is far from the possibilities of a computer of 32 bits (<span class="math inline">\(2^{32} = 4,3\)</span> billions possibilities).</p>
 <p>Then, a student asked how about to put the cards on the table and mash them with the hands. He explained that this is efficient and is hard to predict the result or the efficiency of this method because it is hard to model this method, but certainly, with 8x10^67 possibilities, there will be still cards in sequence.</p>
-<p>Another student suggested to take off the top ten cards, and shuffle and then shuffle the rest of the deck. The professor explained that there is many machines in Vegas which use this idea: the deck enters in the machine and cards are separated in ten shelves, some on and others under the pile. But again, the problem resides that the decision that the machine does is based in the random number which it generates, again 2^32 or 2^64.</p>
+<p>Another student suggested to take off the top ten cards, and shuffle and then shuffle the rest of the deck. The professor explained that there is many machines in Vegas which use this idea: the deck enters in the machine and cards are separated in ten shelves, some on and others under the pile. But again, the problem resides that the decision that the machine does is based in the random number which it generates, again <span class="math inline">\(2^{32}\)</span> or <span class="math inline">\(2^{64}\)</span>.</p>
 <p>He explained again that practically nothing is random because we do not try all the possibilities: we do not shuffle the cards enough, we do not toss the coin enough, etc.</p>
 <p>He stated that the problem of lack of randomness in tossing coins is because we use Physics, we can define the position in which the coin will end. If we know the initial condition (head or tail), apply a known force in a known region of the coin, you can know the height that the coin will reach and how many turns it will spin, so you can tell how it will end - tail or head.</p>
 <p>So, he concludes that nothing is completely random.</p>

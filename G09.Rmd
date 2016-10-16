@@ -638,15 +638,15 @@ The video starts talking about how many times do we need to shuffle the deck of 
 
 But usually we cannot try out all the possibilities. In a complete deck of 52 cards, it means that we have 52! possibilities of sequences of cards, which results in more than $8x10^{67}$ possibilities.
 
-Also, the mentioned that if you give an ordered deck of cards to a friend and tell him to shuffle by  the common way of shuffling (without seeing while he does), which divides the deck in two parts of almost the same size, and  shuffle them and put them together again, you will still have $2^{number\_of\_shuffles}$ rising 'small' sequences in the middle of the deck. If your friend mix 3 times, so there's 8 rising sequences in the deck. And then you do a magic: remove cards one by one. If a card is not in order with the previous card, you start another pile. If it's in order, you put in the same pile. In the 9th pile is the card that the person has taken.
+Also, they mentioned that if you give an ordered deck of cards to a friend and tell him to shuffle by  the common way of shuffling (without seeing while he does), which divides the deck in two parts of almost the same size, and  shuffle them and put them together again, you will still have $2^{number\_of\_shuffles}$ rising 'small' sequences in the middle of the deck. If your friend mix 3 times, so there's 8 rising sequences in the deck. And then you do a magic: remove cards one by one. If a card is not in order with the previous card, you start another pile. If it's in order, you put in the same pile. In the 9th pile is the card that the person has taken.
 
-He affirmed again, practically, the deck is never completely mixed, it is not random. He raised a question: how much do we accept it to be shuffled? It will not be random, but how much do we consider it enough?
+He affirmed again, practically, that the deck is never completely mixed, it is not random. He raised a question: how much do we accept it to be shuffled? It will not be random, but how much do we consider it enough?
 
 When he cites the on-line poker, he  compares that to have a deck really shuffled randomly, you would need to have computer with the capacity to process numbers in the order of  $6x10^{67}$, which is far from the possibilities of a computer of 32 bits ($2^{32} = 4,3$ billions possibilities).
 
 Then, a student asked how about to put the cards on the table and mash them with the hands. He explained that this is efficient and is hard to predict the result or the efficiency of this method because it is hard to model this method, but certainly, with 8x10^67 possibilities, there will be still cards in sequence.
 
-Another student suggested to take off the top ten cards, and shuffle and then shuffle the rest of the deck. The professor explained that there is many machines in Vegas which use this idea: the deck enters in the machine and cards are separated in ten shelves, some on and others under the pile. But again, the problem resides that the decision that the machine does is based in the random number which it generates, again $2^{32}$ or $2^{64}$.
+Another student suggested to take off the top ten cards, and shuffle and then shuffle the rest of the deck. The professor explained that there are many machines in Vegas which use this idea: the deck enters in the machine and cards are separated in ten shelves, some on and others under the pile. But again, the problem resides that the decision that the machine does is based in the random number which it generates, again $2^{32}$ or $2^{64}$.
 
 He explained again that practically nothing is random because we do not try all the possibilities: we do not shuffle the cards enough, we do not toss the coin enough, etc.
 

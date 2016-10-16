@@ -469,37 +469,66 @@ b. We have the events:
     \end{aligned}
     $$
 
-c. Assuming same scenario than in b. (but $p=0.95$) we now need to find how big should $p$ be so that $\mathbb{P} \left( A \mid B\right)=0.9$.
+c. Assuming same scenario than in b. (but $p=0.95$) we now need to find how big should $p$ be so that $\mathbb{P} \left( B \mid A\right)=0.9$.
 
-    We need $p$ such that $\mathbb{P} \left( A \mid B\right)=0.9$
+    We need $p$ such that $\mathbb{P} \left( B \mid A\right)=0.9$
 
 $$
 \begin{aligned}
   \\\mathbb{P}\left ( B\mid A \right ) = & \frac{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right )}{\mathbb{P}\left ( A \right )}\\
-  = & \frac{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right )}{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right ) + \mathbb{P}\left ( A\mid B^{C} \right )\cdot \mathbb{P}\left ( B^{C} \right )} \\ 
-  = & \frac{p\cdot \mathbb{P}\left ( B \right )}{p\cdot \mathbb{P}\left ( B \right ) + \left ( 1 - p \right )\cdot \mathbb{P}\left ( B^{C} \right )}\\
+  0.90 = & \frac{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right )}{\mathbb{P}\left ( A\mid B \right )\cdot \mathbb{P}\left ( B \right ) + \mathbb{P}\left ( A\mid B^{c} \right )\cdot \mathbb{P}\left ( B^{c} \right )} \\ 
+ 0.90 = & \frac{p\cdot \mathbb{P}\left ( B \right )}{p\cdot \mathbb{P}\left ( B \right ) + \left ( 1 - p \right )\cdot \mathbb{P}\left ( B^{c} \right )}\\
   0.90 = & \frac{p\cdot 0.05}{p\cdot 0.05 + \left ( 1 - p \right )\cdot 0.95}\\
-  0.90 \cdot \left ( p\cdot 0.05 + \left ( 1 - p \right )\cdot 0.95 \right ) = & p\cdot 0.05\\
-  0.90 \cdot \left ( -0.90 \cdot p + 0.95 \right ) = & 0.05 \cdot p \\
-  -0.81 \cdot p + 0.855 = & 0.05 \cdot p\\
-  0.855 = 0.05 \cdot p + 0.81 \cdot p\\
-  0.855 = 0.86 \cdot p\\
-  \frac{0.855}{0.86} = & p\\
-  \frac{171}{172} = & p
+  p\cdot 0.05 = & 0.90 \cdot \left ( p\cdot 0.05 + \left ( 1 - p \right )\cdot 0.95 \right ) & \text{ because } p\cdot 0.05 + \left ( 1 - p \right )\cdot 0.95 >0\\
+  0.05 \cdot p = &  0.90 \cdot \left ( -0.90 \cdot p + 0.95 \right )  \\
+  0.05 \cdot p = & -0.81 \cdot p + 0.855 \\
+  0.05 \cdot p + 0.81 \cdot p = & 0.855\\
+  0.86 \cdot p = & 0.855\\
+  p = & \frac{0.855}{0.86} = \frac{855}{860} = \frac{171}{172}
 \end{aligned}
 $$
 
+d. 
+    Therefore, $p$ should be $\displaystyle \frac{171}{172}$. Let's check:
+        
+    $\displaystyle \mathbb{P}\left( B \mid A \right) = \displaystyle \frac{\displaystyle \frac{5 \cdot 171}{100 \cdot 172}}{\displaystyle \frac{5 \cdot 171}{100 \cdot 172}+ \displaystyle\frac{95 \cdot 1}{100 \cdot 172}} = \frac{855}{950} = \frac{9}{10}$
 
-### 3.18
+
+### Problem 3.18
+Suppose $A$ and $B$ are events with $0 < \mathbb{P}\left(A\right) < 1$ and $0 < \mathbb{P}\left(B\right) < 1$.
+
+a. If $A$ and $B$ are disjoint, can they be independent?
+b. If $A$ and $B$ are independent, can they be disjoint?
+c. If $A \subset B$, can $A$ and $B$ be independent?
+d. If $A$ and B are independent, can $A$ and $A \cup B$ be independent?
+
+#### Solution
+a. Let $A$ and $B$ disjoint events such that $0 < \mathbb{P}\left(A\right) < 1$ and $0 < \mathbb{P}\left(B\right) < 1$. So, 
+    let's assume that $A$ and $B$ are independent. $\mathbb{P}\left(A \cap B\right) = \mathbb{P}\left(A\right) \cdot \mathbb{P}\left(B\right)$. 
+    Therefore, to be independent it must satisfy $\mathbb{P}\left(A \cap B\right) = \mathbb{P}\left(\emptyset\right) = 0$ because $A \cap B = \emptyset$. 
+    Then, $\mathbb{P}\left(A\right) \cdot \mathbb{P}\left(B\right) = 0$. 
+    But we know that $\mathbb{P}\left(A\right) > 0$, $\mathbb{P}\left(B\right)>0$ then $\mathbb{P}\left(A\right) \cdot \mathbb{P}\left(B\right)>0$.
+    As a result, if $A$ and $B$ are disjoint, $0 < \mathbb{P}\left(A\right) < 1$ and $0 < \mathbb{P}\left(B\right) < 1$ they can't be independent.
+
+b. Let $A$ and $B$ independent events such that $0 < \mathbb{P}\left(A\right) < 1$ and $0 < \mathbb{P}\left(B\right) < 1$. So, if  $A$ and $B$ are independent then $\mathbb{P}\left(A \cap B\right) = \mathbb{P}\left(A\right) \cdot \mathbb{P}\left(B\right)$. We know that $\mathbb{P}\left(A\right) > 0$ and $\mathbb{P}\left(B\right)>0$ then $\mathbb{P}\left(A\right) \cdot \mathbb{P}\left(B\right)>0$. Which means, $A \cap B \neq \emptyset$. Finally, if $A$ and $B$ are independent, $0 < \mathbb{P}\left(A\right) < 1$ and $0 < \mathbb{P}\left(B\right) < 1$ they can't be disjoint.
+
+c. Let $A$ and $B$ events such that $A \subset B$ and $0 < \mathbb{P}\left(A\right) < 1$ and $0 < \mathbb{P}\left(B\right) < 1$. For $A$ and $B$ to be independent it must be satisfied that $\mathbb{P}\left(A \cap B\right) = \mathbb{P}\left(A\right) \cdot \mathbb{P}\left(B\right)$ and we know that if $A \subset B$ then $A \cap B = A$. Therefore using both premises we have $\mathbb{P}\left(A\right) \cdot \mathbb{P}\left(B\right) = \mathbb{P}\left(A\right)$ which means, as $\mathbb{P}\left(A\right) >0$, that $\mathbb{P}\left(B\right)=1$. But, by definition $\mathbb{P}\left(B\right)<1$. Finally, if $A \subset B$, $0 < \mathbb{P}\left(A\right) < 1$ and $0 < \mathbb{P}\left(B\right) < 1$ they can't be independent.
+
+d.  Let $A$ and $B$ independent events such that $0 < \mathbb{P}\left(A\right) < 1$ and $0 < \mathbb{P}\left(B\right) < 1$. So, $\mathbb{P}\left(A \cap \left(A \cup B\right) \right) = \mathbb{P}\left( \left(A \cap A\right) \cup \left(A \cap B\right) \right) = \mathbb{P}\left(A\right) + \mathbb{P}\left(A \cap B\right) - \mathbb{P}\left(A \cap B\right) = \mathbb{P}\left(A\right)$.  Let's assume that $A$ and $A \cup B$ are independent then $\mathbb{P}\left(A \cap\left(A \cup B\right) \right) = \mathbb{P}\left(A\right) \cdot \mathbb{P}\left(A \cup B\right)$. We now have that $\mathbb{P}\left(A\right) \cdot \mathbb{P}\left(A \cup B\right) = \mathbb{P}\left(A\right)$ which means $\mathbb{P}\left(A \cup B\right) = 1$ and $A \cup B =\Omega$ because $\mathbb{P}\left(A\right) > 0$. Now, let's use the probability of a union:
 
 $$
-\begin{equation}
+\begin{aligned}
+  \mathbb{P}\left(A \cup B\right) = & \mathbb{P}\left(A\right) + \mathbb{P}\left(B\right) - \mathbb{P}\left(A \cap B\right) \\
+  1 = & \mathbb{P}\left(A\right) + \mathbb{P}\left(B\right) - \mathbb{P}\left(A \cap B\right) && A \cup B =\Omega \\
+  1 = & \mathbb{P}\left(A\right) + \mathbb{P}\left(B\right) - \mathbb{P}\left(A\right) \cdot \mathbb{P}\left(B\right) && A \text{ and } B \text{ independent} \\
+  1 - \mathbb{P}\left(A\right) = & \mathbb{P}\left(B\right) - \mathbb{P}\left(A\right) \cdot \mathbb{P}\left(B\right) \\
+   1 - \mathbb{P}\left(A\right) = & \mathbb{P}\left(B\right) \cdot \left(1 - \mathbb{P}\left(A\right) \right) && \text{Distributive} \\
+   \mathbb{P}\left(A^{c}\right) = &  \mathbb{P}\left(B\right) \cdot \mathbb{P}\left(A^{c}\right) && \text{(3)} \\ 
+   1 = & \mathbb{P}\left(B\right) &&  \mathbb{P}\left(A^{c}\right) > 0
+\end{aligned}
+$$But, by definition $\mathbb{P}\left(B\right)<1$. Therefore, if $A$ and $B$ are independent, $0 < \mathbb{P}\left(A\right) < 1$ and $0 < \mathbb{P}\left(B\right) < 1$ then $A$ and $A \cup B$ can't be independent.
 
-\end{equation}
-$$
-
-
-## 2.Topic: Discrete random variables – Chapter 4
+## 2. Topic: Discrete random variables – Chapter 4
 
 ### 4.2
 
